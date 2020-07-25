@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 172.18.0.2:3306
--- 生成日期： 2020-07-25 03:24:54
+-- 生成日期： 2020-07-25 11:02:32
 -- 服务器版本： 5.7.29-32-57
 -- PHP 版本： 7.4.5
 
@@ -48,7 +48,16 @@ INSERT INTO `red_packet_record` (`id`, `create_time`, `money`, `red_packet_id`, 
 (9, '2020-07-25 11:23:43', 802, 1, 12),
 (10, '2020-07-25 11:23:43', 133, 1, 5),
 (12, '2020-07-25 11:23:43', 2928, 1, 14),
-(14, '2020-07-25 11:23:43', 4478, 1, 2);
+(14, '2020-07-25 11:23:43', 4478, 1, 2),
+(15, '2020-07-25 11:28:21', 953, 2, 14),
+(16, '2020-07-25 11:28:21', 567, 2, 1),
+(18, '2020-07-25 11:28:21', 3376, 2, 7),
+(20, '2020-07-25 11:28:21', 3035, 2, 4),
+(22, '2020-07-25 11:28:21', 2647, 2, 2),
+(24, '2020-07-25 11:28:21', 234, 2, 6),
+(25, '2020-07-25 11:28:21', 3004, 2, 3),
+(27, '2020-07-25 11:28:21', 2752, 2, 9),
+(29, '2020-07-25 11:28:21', 3432, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -66,6 +75,28 @@ CREATE TABLE `red_racket` (
   `uid` int(11) NOT NULL,
   `version` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `role`
+--
+
+CREATE TABLE `role` (
+  `id` bigint(11) NOT NULL COMMENT '角色id',
+  `name` varchar(20) NOT NULL COMMENT '角色名',
+  `display_name` varchar(120) NOT NULL COMMENT '显示名称',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色表';
+
+--
+-- 转存表中的数据 `role`
+--
+
+INSERT INTO `role` (`id`, `name`, `display_name`, `update_time`, `create_time`) VALUES
+(1, 'vip1', 'vip1', '2020-07-25 09:54:45', '2020-07-25 09:54:45'),
+(3, 'vip2', 'vip2', '2020-07-25 09:54:45', '2020-07-25 09:54:45');
 
 -- --------------------------------------------------------
 
@@ -106,6 +137,50 @@ CREATE TABLE `success_killed` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='秒杀成功明细表';
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `user`
+--
+
+CREATE TABLE `user` (
+  `id` bigint(20) NOT NULL COMMENT '用户id',
+  `username` varchar(120) NOT NULL COMMENT '用户名',
+  `password` varchar(1024) NOT NULL COMMENT '密码',
+  `enabled` tinyint(1) NOT NULL COMMENT '账号是否可用',
+  `locked` tinyint(1) NOT NULL COMMENT '是否被锁',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
+
+--
+-- 转存表中的数据 `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `locked`, `update_time`, `create_time`) VALUES
+(1, 'admin', 'admin', 1, 1, '2020-07-25 09:52:15', '2020-07-25 09:52:15');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `user_role`
+--
+
+CREATE TABLE `user_role` (
+  `id` bigint(11) NOT NULL COMMENT 'id',
+  `uid` bigint(20) NOT NULL COMMENT '用户ID',
+  `rid` bigint(11) NOT NULL COMMENT '角色ID',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色表';
+
+--
+-- 转存表中的数据 `user_role`
+--
+
+INSERT INTO `user_role` (`id`, `uid`, `rid`, `update_time`, `create_time`) VALUES
+(1, 1, 1, '2020-07-25 09:55:13', '2020-07-25 09:55:13');
+
 --
 -- 转储表的索引
 --
@@ -120,6 +195,12 @@ ALTER TABLE `red_packet_record`
 -- 表的索引 `red_racket`
 --
 ALTER TABLE `red_racket`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 表的索引 `role`
+--
+ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -139,6 +220,18 @@ ALTER TABLE `success_killed`
   ADD KEY `idx_create_time` (`create_time`);
 
 --
+-- 表的索引 `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 表的索引 `user_role`
+--
+ALTER TABLE `user_role`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- 在导出的表使用AUTO_INCREMENT
 --
 
@@ -146,7 +239,7 @@ ALTER TABLE `success_killed`
 -- 使用表AUTO_INCREMENT `red_packet_record`
 --
 ALTER TABLE `red_packet_record`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- 使用表AUTO_INCREMENT `red_racket`
@@ -155,10 +248,28 @@ ALTER TABLE `red_racket`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
+-- 使用表AUTO_INCREMENT `role`
+--
+ALTER TABLE `role`
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT COMMENT '角色id', AUTO_INCREMENT=5;
+
+--
 -- 使用表AUTO_INCREMENT `seckill`
 --
 ALTER TABLE `seckill`
-  MODIFY `seckill_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '商品库存id', AUTO_INCREMENT=1004;
+  MODIFY `seckill_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '商品库存id', AUTO_INCREMENT=1005;
+
+--
+-- 使用表AUTO_INCREMENT `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户id', AUTO_INCREMENT=3;
+
+--
+-- 使用表AUTO_INCREMENT `user_role`
+--
+ALTER TABLE `user_role`
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT COMMENT 'id', AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
