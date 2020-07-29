@@ -57,9 +57,16 @@ java后端：SpringBoot + Thymeleaf + WebSocket + Spring Security + SpringData-J
        `docker pull sheepkiller/kafka-manager` <br/>
    启动 kafka-manager 服务：<br/> 
        `docker run -d --name luckypai_kafka-manager --link luckypai_zookeeper:luckypai_zookeeper --link luckypai_kafka:luckypai_kafka -p 9001:9000 --restart=always --env ZK_HOSTS=luckypai_zookeeper:2181 --network=luckypai_net --ip 172.20.0.16 sheepkiller/kafka-manager` <br/>
-   反问 kafka-manager 控制面板：<br/> 
+   访问 kafka-manager 控制面板：<br/> 
    [http://127.0.0.1:9001](http://127.0.0.1:9001) <br/>
    
+- ActiveMQ <br/>
+   获取镜像:<br/>
+       `docker pull webcenter/activemq` <br/>
+   启动 ActiveMQ 服务：<br/> 
+       `docker run -d --name luckypai_activemq -p 61616:61616 -p 8161:8161 --network=luckypai_net --ip 172.20.0.17 webcenter/activemq` <br/>
+   访问 Manage ActiveMQ 控制面板：<br/> 
+   [http://127.0.0.1:8161/](http://127.0.0.1:8161/)  点击Manage ActiveMQ broker使用默认账号/密码：admin/admin<br/>
     
 ## 启动说明
 
