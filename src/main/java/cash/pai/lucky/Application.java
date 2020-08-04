@@ -13,7 +13,7 @@ import org.springframework.security.core.session.SessionRegistryImpl;
  * 启动类
  * 创建者 爪哇笔记
  * 创建时间	2018年5月12日
- * API接口测试：http://localhost:8080/lucky/swagger-ui.html
+ * API接口测试：http://localhost:8080/swagger-ui.html
  */
 @EnableAsync
 @SpringBootApplication
