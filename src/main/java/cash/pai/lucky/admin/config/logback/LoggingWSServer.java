@@ -4,13 +4,16 @@ package cash.pai.lucky.admin.config.logback;
 import cash.pai.lucky.admin.config.websocket.MyEndpointConfigure;
 import cash.pai.lucky.admin.util.ErrorUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.impl.StaticLoggerBinder;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.logging.LoggingSystem;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.util.StringUtils;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -54,16 +57,17 @@ public class LoggingWSServer {
             BufferedReader reader = null;
             while (sessionMap.get(session.getId()) != null) {
                 try {
+                    File logFile = getLastLogFile();
+                    if (logFile == null) {
+                        return;
+                    }
                     //日志文件，获取最新的
-                    FileReader fileReader = new FileReader(System.getProperty("user.home") + "/log/" + new SimpleDateFormat("yyyyMMdd").format(new Date()) + "/" + applicationName + ".log");
-
+                    FileReader fileReader = new FileReader(logFile);
                     //字符流
                     reader = new BufferedReader(fileReader);
                     Object[] lines = reader.lines().toArray();
-
                     //只取从上次之后产生的日志
                     Object[] copyOfRange = Arrays.copyOfRange(lines, lengthMap.get(session.getId()), lines.length);
-
                     //对日志进行着色，更加美观  PS：注意，这里要根据日志生成规则来操作
                     for (int i = 0; i < copyOfRange.length; i++) {
                         String line = (String) copyOfRange[i];
@@ -171,5 +175,28 @@ public class LoggingWSServer {
             //输出到日志文件中
             log.error(ErrorUtil.errorInfoToString(e));
         }
+    }
+
+    /**
+     * 获取最新的日志文件。
+     * @return
+     */
+    private File getLastLogFile() {
+        String logDir = System.getProperty("user.dir") + "/log";
+        //+ new SimpleDateFormat("yyyyMMdd").format(new Date()) + "/" + applicationName + ".log"
+        File file = new File(logDir);
+        File[] fs = file.listFiles();
+        if (fs == null || fs.length == 0) {
+            return null;
+        }
+        File lastFile = null;
+        for (File f : fs) {
+            if (lastFile == null) {
+                lastFile = f;
+            } else {
+                lastFile = f.lastModified() > lastFile.lastModified() ? f : lastFile;
+            }
+        }
+        return lastFile;
     }
 }
