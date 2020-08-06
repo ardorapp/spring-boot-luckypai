@@ -226,6 +226,12 @@
 <!--		  <artifactId>spring-data-jpa</artifactId>-->
 <!--		  <version>2.1.6.RELEASE</version>-->
 <!--	  </dependency>-->
+	  <!--引入PAI区块链：paicoin-rpc-client -->
+	  <dependency>
+		  <groupId>cash.pai.rpcclient</groupId>
+		  <artifactId>paicoin-rpc-client</artifactId>
+		  <version>0.0.1-SNAPSHOT</version>
+	  </dependency>
   </dependencies>
   <build>
         <finalName>spring-boot-luckypai</finalName>
