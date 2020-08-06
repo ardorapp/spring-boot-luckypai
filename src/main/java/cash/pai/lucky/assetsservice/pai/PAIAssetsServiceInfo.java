@@ -25,7 +25,7 @@ public class PAIAssetsServiceInfo implements AssetsServiceInfo {
 
     @Override
     public long mediantime() {
-        return 0;
+        return blockChainInfo.medianTime();
     }
 
     @Override

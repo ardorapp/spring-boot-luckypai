@@ -400,7 +400,7 @@ CREATE TABLE `wallet_assets` (
   `assets_symbol` varchar(255) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `last_block_height` varchar(255) DEFAULT NULL,
-  `last_block_time` varchar(255) DEFAULT NULL,
+  `last_block_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -409,8 +409,8 @@ CREATE TABLE `wallet_assets` (
 --
 
 INSERT INTO `wallet_assets` (`assets_id`, `assets_home`, `assets_introduction`, `assets_name`, `assets_name_zh`, `assets_symbol`, `create_time`, `last_block_height`, `last_block_time`, `update_time`) VALUES
-('16cd4f04344f4bbd95babeae768d23b4', 'projectpai.com', '介绍PAI', 'Project PAI', '1派', 'PAI', '2020-08-05 08:29:03', '', NULL, '2020-08-05 08:29:52'),
-('e7d5705c15dc466d9578e347cdbd12bb', '', '', 'bitcoin', '比特币', 'BTC', '2020-08-05 08:29:58', '', NULL, '2020-08-05 08:30:18');
+('16cd4f04344f4bbd95babeae768d23b4', 'projectpai.com', '介绍PAI', 'Project PAI', '1派', 'PAI', '2020-08-05 08:29:03', '', '2020-08-05 08:29:52', '2020-08-05 08:29:52'),
+('e7d5705c15dc466d9578e347cdbd12bb', '', '', 'bitcoin', '比特币', 'BTC', '2020-08-05 08:29:58', '', '2020-08-05 08:29:52', '2020-08-05 08:30:18');
 
 --
 -- 转储表的索引

@@ -53,9 +53,11 @@ public class WalletAssetsServiceImpl extends CommonServiceImpl<WalletAssetsVo, W
         if (assetsServiceInfo == null) {
             return;
         }
-        log.info("update "+assetsVo.getAssetsSymbol()+" LastBlockHeight："+assetsServiceInfo.blocks());
+        Date lastBlockTime = new Date(assetsServiceInfo.mediantime() * 1000);
+        log.info("update "+assetsVo.getAssetsSymbol()+" LastBlockHeight："+assetsServiceInfo.blocks() + " " +lastBlockTime);
         assetsVo.setUpdateTime(new Date());
         assetsVo.setLastBlockHeight(""+assetsServiceInfo.blocks());
+        assetsVo.setLastBlockTime(lastBlockTime);
         save(assetsVo);
     }
 }

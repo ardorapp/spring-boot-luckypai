@@ -27,7 +27,7 @@ public class WalletAssets implements Serializable {
 
     private String lastBlockHeight;//最新区块高度
 
-    private String lastBlockTime;//最新区块时间
+    private Date lastBlockTime;//最新区块时间
 
     private Date createTime;//创建时间
 
