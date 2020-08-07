@@ -1,6 +1,7 @@
 package cash.pai.lucky.admin.wallet.account.vo;
 
 import cash.pai.lucky.admin.common.pojo.PageCondition;
+import cash.pai.lucky.admin.wallet.assets.vo.WalletAssetsVo;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -10,22 +11,30 @@ import java.util.Date;
 public class WalletAccountVo extends PageCondition implements Serializable {
     private String id;//表id
 
-    private String sysName;//系统名称
+    private String userId;//用户id
 
-    private String sysLogo;//系统logo图标
+    private String assetsId;//资产ID
 
-    private String sysBottomText;//系统底部信息
+    private WalletAssetsVo walletAssets;
 
-    private String sysColor;//系统颜色
+    private String receiveAccount;//接收账号
 
-    private String sysNoticeText;//系统公告
+    private String receiveAddress;//接收地址
 
-    private String sysApiEncrypt;//API加密 Y/N
+    private String receiveBalance;//接收余额
+
+    private String sendAccount;//发送账号
+
+    private String sendPrivateKey;//发送私钥
+
+    private String sendAddress;//发送地址
+
+    private String sendBalance;//发送余额
+
+    private String accountPassword;//账号密码
 
     private Date createTime;//创建时间
 
     private Date updateTime;//修改时间
-
-    private String userInitPassword;//用户管理：初始、重置密码
 
 }

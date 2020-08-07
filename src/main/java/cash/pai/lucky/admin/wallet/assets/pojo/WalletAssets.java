@@ -25,6 +25,8 @@ public class WalletAssets implements Serializable {
 
     private String assetsHome;//资产官网
 
+    private Boolean assetsEnable;//资产是否可用
+
     private String lastBlockHeight;//最新区块高度
 
     private Date lastBlockTime;//最新区块时间

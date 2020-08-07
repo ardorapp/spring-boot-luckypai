@@ -2,7 +2,7 @@ package cash.pai.lucky.admin.wallet.assets.service;
 
 import cash.pai.lucky.admin.common.pojo.Result;
 import cash.pai.lucky.admin.common.service.CommonServiceImpl;
-import cash.pai.lucky.admin.util.SysSettingUtil;
+import cash.pai.lucky.admin.util.CopyUtil;
 import cash.pai.lucky.admin.wallet.assets.pojo.WalletAssets;
 import cash.pai.lucky.admin.wallet.assets.repository.WalletAssetsRepository;
 import cash.pai.lucky.admin.wallet.assets.vo.WalletAssetsVo;
@@ -11,16 +11,13 @@ import cash.pai.lucky.assetsservice.AssetsServiceHub;
 import cash.pai.lucky.assetsservice.AssetsServiceInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -29,6 +26,9 @@ import java.util.Date;
 //@Component
 @EnableScheduling   // 2.开启定时任务
 public class WalletAssetsServiceImpl extends CommonServiceImpl<WalletAssetsVo, WalletAssets, String> implements WalletAssetsService {
+
+    @Autowired
+    private WalletAssetsRepository walletAssetsRepository;
 
     @Override
     public Result<WalletAssetsVo> save(WalletAssetsVo entityVo) {
@@ -59,5 +59,10 @@ public class WalletAssetsServiceImpl extends CommonServiceImpl<WalletAssetsVo, W
         assetsVo.setLastBlockHeight(""+assetsServiceInfo.blocks());
         assetsVo.setLastBlockTime(lastBlockTime);
         save(assetsVo);
+    }
+
+    @Override
+    public Result<List<WalletAssetsVo>> findByAssetsEnable(Boolean assetsEnable) {
+        return Result.of(CopyUtil.copyList(walletAssetsRepository.findByAssetsEnable(assetsEnable), WalletAssetsVo.class));
     }
 }

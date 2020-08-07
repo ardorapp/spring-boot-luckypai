@@ -9,6 +9,8 @@ import cash.pai.lucky.admin.sys.sysuser.service.SysUserService;
 import cash.pai.lucky.admin.sys.sysuser.vo.SysUserVo;
 import cash.pai.lucky.admin.sys.sysusermenu.service.SysUserMenuService;
 import cash.pai.lucky.admin.util.*;
+import cash.pai.lucky.admin.wallet.account.service.WalletAccountService;
+import cash.pai.lucky.assetsservice.AssetsServiceHub;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,6 +50,9 @@ public class IndexController {
     @Autowired
     private SysShortcutMenuService sysShortcutMenuService;
 
+    @Autowired
+    private WalletAccountService walletAccountService;
+
     /**
      * 端口
      */
@@ -66,6 +71,7 @@ public class IndexController {
                 sysSettingVo.setUserInitPassword(null);//隐藏部分属性
                 SysSettingUtil.setSysSettingMap(sysSettingVo);
 
+//                AssetsServiceHub.setupAssets(walletAccountService.list(null).getData());
                 //获取本机内网IP
                 log.info("启动成功：" + "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + port + "/");
             } catch (UnknownHostException e) {

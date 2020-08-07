@@ -1,10 +1,11 @@
 package cash.pai.lucky.admin.wallet.account.pojo;
 
+import cash.pai.lucky.admin.wallet.assets.pojo.WalletAssets;
 import lombok.Data;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -27,6 +28,8 @@ public class WalletAccount implements Serializable {
 
     private String sendAccount;//发送账号
 
+    private String sendPrivateKey;//发送私钥
+
     private String sendAddress;//发送地址
 
     private String sendBalance;//发送余额
@@ -36,4 +39,9 @@ public class WalletAccount implements Serializable {
     private Date createTime;//创建时间
 
     private Date updateTime;//修改时间
+
+    @OneToOne
+    @JoinColumn(name = "assetsId",referencedColumnName = "assetsId", insertable = false, updatable = false)
+    @NotFound(action= NotFoundAction.IGNORE)
+    private WalletAssets walletAssets;
 }
