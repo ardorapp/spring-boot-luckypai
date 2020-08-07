@@ -62,6 +62,7 @@ layui.use(['element', 'form', 'table', 'layer', 'laydate', 'util'], function () 
         //编辑
         if (obj.event === 'edit') {
             //回显操作表单
+            data.assetsSymbol = data.walletAssets.assetsSymbol;
             $("#accountForm").form(data);
             form.render();
         }
