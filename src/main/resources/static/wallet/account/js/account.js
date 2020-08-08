@@ -36,15 +36,18 @@ layui.use(['element', 'form', 'table', 'layer', 'laydate', 'util'], function () 
         , title: '账号列表'
         , cols: [[
             {field: 'id', title: 'ID', hide: true}
+            , {field: 'userId', title: 'userId',hide: true}
+            , {field: 'assetsId', title: 'assetsId',hide: true}
             , {field: 'assetsSymbol', title: '资产名称',
                 templet:function(data){
                     if(data.walletAssets) return data.walletAssets.assetsSymbol;
                     return ''
                 }
             }
-            , {field: 'receiveAddress', title: '接收红包地址',hide: true}
+            , {field: 'receiveAccount', title: 'receiveAccount',hide: true}
+            , {field: 'receiveAddress', title: 'receiveAddress',hide: true}
             , {field: 'receiveBalance', title: '已收红包金额'}
-            , {field: 'sendAddress', title: '发送红包地址',hide: true}
+            , {field: 'sendAddress', title: 'sendAddress',hide: true}
             , {field: 'sendBalance', title: '待发红包余额'}
             , {field: 'createTime', title: '创建时间', hide: true}
             , {field: 'updateTime', title: '更新时间', hide: true}
@@ -82,10 +85,14 @@ layui.use(['element', 'form', 'table', 'layer', 'laydate', 'util'], function () 
 function accountFormSave() {
     let accountForm = $("#accountForm").serializeObject();
     accountForm.updateTime = commonUtil.getNowTime();
-    $.post(ctx + "/wallet/account/save", accountForm, function (data) {
-        layer.msg("保存成功", {icon: 1, time: 2000}, function () {});
-        //更新table、updateTime
-        $("input[name='updateTime']").val(accountForm.updateTime);
-        tableIns.reload();
+    $.post(ctx + "/wallet/account/saveReceiveAddress", accountForm, function (data) {
+        if (!data.flag) {
+            layer.msg("保存失败："+data.msg+" ,请重新输入。", {icon: 1, time: 2000}, function () {});
+        } else {
+            layer.msg("保存成功 ", {icon: 1, time: 2000}, function () {});
+            //更新table、updateTime
+            $("input[name='updateTime']").val(accountForm.updateTime);
+            tableIns.reload();
+        }
     });
 }

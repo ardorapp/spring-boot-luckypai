@@ -6,6 +6,7 @@ import cash.pai.lucky.assetsservice.AssetsServiceInfo;
 import cash.pai.rpcclient.PaicoinJSONRPCClient;
 import cash.pai.rpcclient.PaicoindRpcClient;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 
@@ -70,21 +71,25 @@ public class PAIAssetsServiceFactory implements AssetsServiceFactory {
     }
 
     @Override
-    public void importPrivateKey(String privateKey, String account) {
+    public boolean importPrivateKey(String privateKey, String account) {
         try {
             paicoinJSONRPCClient.importPrivKey(privateKey,account);
+            return true;
         } catch (Exception e) {
             log.error("importPrivateKey error ",e);
         }
+        return false;
     }
 
     @Override
-    public void importAddress(String address, String account) {
+    public boolean importAddress(String address, String account) {
         try {
             paicoinJSONRPCClient.importAddress(address,account,false);
+            return true;
         } catch (Exception e) {
             log.error("importAddress error ",e);
         }
+        return false;
     }
 
     @Override
@@ -95,5 +100,16 @@ public class PAIAssetsServiceFactory implements AssetsServiceFactory {
             log.error("importAddress error ",e);
         }
         return null;
+    }
+
+    @Override
+    public boolean validationAddress(String address) {
+        if (StringUtils.isEmpty(address)) {
+            return false;
+        }
+        //MtMHwVoGLwC9KgewQm9TCxRukHdkQuLEMs
+        PaicoindRpcClient.AddressValidationResult result = paicoinJSONRPCClient.validateAddress(address);
+        log.info("validationAddress "+result);
+        return result.isValid();
     }
 }

@@ -16,9 +16,11 @@ public interface AssetsServiceFactory {
 
     String getPrivateKey(String address);
 
-    void importPrivateKey(String privateKey, String account);
+    boolean importPrivateKey(String privateKey, String account);
 
-    void importAddress(String address, String account);
+    boolean importAddress(String address, String account);
 
     BigDecimal getBalance(String account);
+
+    boolean validationAddress(String address);
 }

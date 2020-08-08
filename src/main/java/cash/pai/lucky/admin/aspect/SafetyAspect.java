@@ -40,6 +40,7 @@ public class SafetyAspect {
      * cash.pai.lucky.admin.*.controller包下面的所有方法
      */
     @Pointcut(value = "execution(public * cash.pai.lucky.admin.sys.*.controller.*.*(..)) || " +
+            "execution(public * cash.pai.lucky.admin.wallet.*.controller.*.*(..)) || " +
             "execution(public * cash.pai.lucky.admin.*.controller.*.*(..))")
     public void safetyAspect() {}
 
