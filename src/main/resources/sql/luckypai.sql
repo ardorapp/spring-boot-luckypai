@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 172.20.0.11:3306
--- 生成日期： 2020-08-07 09:25:58
+-- 生成日期： 2020-08-08 10:19:44
 -- 服务器版本： 8.0.21
 -- PHP 版本： 7.4.5
 
@@ -60,7 +60,7 @@ CREATE TABLE `persistent_logins` (
 --
 
 INSERT INTO `persistent_logins` (`series`, `username`, `token`) VALUES
-('DHmNdeTm91d0sHgqgxGDTw==', 'sa', 'cAOaeH1pTImp+NSIa6M/2A==');
+('zc+jPvjA8yO1pwX+fRlaZQ==', 'sa', 'PmKnAmg+oOWlbIskKAf6DQ==');
 
 -- --------------------------------------------------------
 
@@ -200,7 +200,7 @@ CREATE TABLE `sys_menu` (
 --
 
 INSERT INTO `sys_menu` (`menu_id`, `menu_name`, `menu_path`, `menu_parent_id`, `create_time`, `update_time`) VALUES
-('11fafa2d2cbd4456817504d69478be7b', '地址管理', '/wallet/account/setting', 'bcf17dc0ce304f0ba02d64ce21ddb43d', '2020-08-04 12:32:57', '2020-08-04 12:32:57'),
+('11fafa2d2cbd4456817504d69478be7b', '账号管理', '/wallet/account/setting', 'bcf17dc0ce304f0ba02d64ce21ddb43d', '2020-08-04 12:32:57', '2020-08-04 12:32:57'),
 ('35cb950cebb04bb18bb1d8b742a02005', 'XXX菜单', '/xxx', '', '2019-09-11 18:05:21', '2019-09-11 18:05:21'),
 ('35cb950cebb04bb18bb1d8b742a02xaa', '权限管理', '/sys/sysAuthority/authority', '35cb950cebb04bb18bb1d8b742a02xxx', '2019-09-10 10:08:58', '2019-09-10 10:08:58'),
 ('35cb950cebb04bb18bb1d8b742a02xcc', '菜单管理', '/sys/sysMenu/menu', '35cb950cebb04bb18bb1d8b742a02xxx', '2019-09-10 10:08:58', '2019-09-10 10:08:58'),
@@ -292,7 +292,7 @@ CREATE TABLE `sys_user` (
 --
 
 INSERT INTO `sys_user` (`user_id`, `login_name`, `user_name`, `password`, `valid`, `limited_ip`, `expired_time`, `last_change_pwd_time`, `limit_multi_login`, `create_time`, `update_time`) VALUES
-('1', 'sa', '超级管理员', 'E10ADC3949BA59ABBE56E057F20F883E', 'Y', '', NULL, '2019-09-17 12:00:36', 'Y', '2019-07-19 16:36:03', '2020-08-07 06:54:50'),
+('1', 'sa', '超级管理员', 'E10ADC3949BA59ABBE56E057F20F883E', 'Y', '', NULL, '2019-09-17 12:00:36', 'Y', '2019-07-19 16:36:03', '2020-08-08 10:15:50'),
 ('2', 'admin', '管理员', 'E10ADC3949BA59ABBE56E057F20F883E', 'Y', '', NULL, '2019-09-17 12:00:36', 'N', '2019-07-19 16:36:03', '2020-08-07 07:31:10'),
 ('3fb1c570496d4c09ab99b8d31b0671cf', 'daji', '妲己', 'E10ADC3949BA59ABBE56E057F20F883E', 'Y', '', NULL, '2019-09-17 12:00:36', 'Y', '2019-09-11 18:11:41', '2019-09-17 12:09:47'),
 ('b5ac62e154964151a19c565346bb354a', 'xiaofang', '小芳', 'E10ADC3949BA59ABBE56E057F20F883E', 'Y', '', NULL, '2019-09-17 12:00:36', 'N', '2019-09-17 14:12:41', '2020-07-28 14:41:47');
@@ -316,12 +316,12 @@ CREATE TABLE `sys_user_authority` (
 --
 
 INSERT INTO `sys_user_authority` (`user_authority_id`, `user_id`, `authority_id`, `create_time`, `update_time`) VALUES
-('05a38b7944714c558f5a1647beebbcc7', '1', '3fb1c570496d4c09ab99b8d31b06xxx', '2020-08-07 06:54:51', '2020-08-07 06:54:51'),
 ('0704bcfe6f974bc8bf6c11d13115ecc9', '2', '3fb1c570496d4c09ab99b8d31b06zzz', '2020-08-07 07:31:11', '2020-08-07 07:31:11'),
 ('4c331da2da7a4357b5cac4ffc3c4fb63', '2', '3fb1c570496d4c09ab99b8d31b06ccc', '2020-08-07 07:31:11', '2020-08-07 07:31:11'),
-('553c3eb8d3ef44b5ad37a72ac96bb3f7', '1', '3fb1c570496d4c09ab99b8d31b06zzz', '2020-08-07 06:54:51', '2020-08-07 06:54:51'),
-('86d1a1ff5d3b4e069502d1ab86b532c6', '1', '3fb1c570496d4c09ab99b8d31b06ccc', '2020-08-07 06:54:51', '2020-08-07 06:54:51'),
+('776521eef2ca4c3ebfd0ed712a220627', '1', '3fb1c570496d4c09ab99b8d31b06xxx', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('8e38735f83d4466b921360b5e74d2e5c', '1', '3fb1c570496d4c09ab99b8d31b06zzz', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
 ('90c18739f3ad41ae8010f6c2b7eeaac5', '3fb1c570496d4c09ab99b8d31b0671cf', '3fb1c570496d4c09ab99b8d31b06ccc', '2019-09-17 12:09:47', '2019-09-17 12:09:47'),
+('b8aa98bf26ee4406a21592790be4a8c9', '1', '3fb1c570496d4c09ab99b8d31b06ccc', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
 ('dd46ed0e01e24855b5430a9dc8d416f3', 'b5ac62e154964151a19c565346bb354a', '3fb1c570496d4c09ab99b8d31b06ccc', '2020-07-28 14:41:48', '2020-07-28 14:41:48');
 
 -- --------------------------------------------------------
@@ -343,24 +343,24 @@ CREATE TABLE `sys_user_menu` (
 --
 
 INSERT INTO `sys_user_menu` (`user_menu_id`, `user_id`, `menu_id`, `create_time`, `update_time`) VALUES
-('037dceb1a72a40ef94b2da00373e8c84', '1', 'bcf17dc0ce304f0ba02d64ce21ddb43d', '2020-08-07 06:54:51', '2020-08-07 06:54:51'),
+('03ae4743ad0f4695bcb66e6f5f3e86ef', '1', '914aa22c78af4327822061f3eada4067', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
 ('05acfd5ff2074081ac8cfcea6f33767e', 'b5ac62e154964151a19c565346bb354a', '35cb950cebb04bb18bb1d8b742a02005', '2020-07-28 14:41:48', '2020-07-28 14:41:48'),
-('0e1865b7c5dd44d795b176a569c7daa7', '1', '74315e162f524a4d88aa931f02416f26', '2020-08-07 06:54:51', '2020-08-07 06:54:51'),
+('0db1262140ee43c89e03c5e6559f8980', '1', '35cb950cebb04bb18bb1d8b742a02xxx', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('0e6933667468467c963c1aea02634b43', '1', 'f65e2aa5ade94ca9a9e2994c9fbf3c58', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('11631147c1454bcdb048ced81489bec3', '1', '35cb950cebb04bb18bb1d8b742a02xzz', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
 ('13cb953c0e82430eaf6b725bd3bdc75c', '2', '35cb950cebb04bb18bb1d8b742a02xaa', '2020-08-07 07:31:11', '2020-08-07 07:31:11'),
-('1af5ac75d48445ea9d1ce09307c82f1e', '1', '914aa22c78af4327822061f3eada4067', '2020-08-07 06:54:51', '2020-08-07 06:54:51'),
-('1d2403af4bfc4c75a143cb6afa5cbe0f', '1', '35cb950cebb04bb18bb1d8b742a02xaa', '2020-08-07 06:54:51', '2020-08-07 06:54:51'),
-('3a1b0f90c0d64ab2aee482e2b46323dc', '1', '35cb950cebb04bb18bb1d8b742a02xzz', '2020-08-07 06:54:51', '2020-08-07 06:54:51'),
-('5bbc76b90488416da07d50ef92052329', '1', '35cb950cebb04bb18bb1d8b742a02xxx', '2020-08-07 06:54:51', '2020-08-07 06:54:51'),
+('1aa88a6facef432ba5ecce21bc55c81d', '1', 'bcf17dc0ce304f0ba02d64ce21ddb43d', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('37e0e28930d44c1397995d73f5f8056e', '1', '35cb950cebb04bb18bb1d8b742a02xcc', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('5933a870b5c645acadf4219cca545c2d', '1', '35cb950cebb04bb18bb1d8b742a02xaa', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('5b6a613ecaa64fc399095ee10df2d9de', '1', '11fafa2d2cbd4456817504d69478be7b', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
 ('5da85598444b44a19e0e2147a0a0093b', '2', '35cb950cebb04bb18bb1d8b742a02xcc', '2020-08-07 07:31:11', '2020-08-07 07:31:11'),
 ('6e8fe2b9307a4855ba7d006dc17c97ae', '3fb1c570496d4c09ab99b8d31b0671cf', '35cb950cebb04bb18bb1d8b742a02005', '2019-09-17 12:09:47', '2019-09-17 12:09:47'),
-('6ed2ccc36f724a94a52dd2f761dad1e7', '1', '35cb950cebb04bb18bb1d8b742a02xcc', '2020-08-07 06:54:51', '2020-08-07 06:54:51'),
 ('77d6929d2e614cb1be334adece1f741b', '2', '35cb950cebb04bb18bb1d8b742a02xxx', '2020-08-07 07:31:11', '2020-08-07 07:31:11'),
-('a397f0356c1b4887a446f5c1db958e21', '1', 'b9e5a8d943354e918b9b2e5d965ca0a6', '2020-08-07 06:54:51', '2020-08-07 06:54:51'),
-('b60665346f094747a6f53850c61d8913', '1', 'f65e2aa5ade94ca9a9e2994c9fbf3c58', '2020-08-07 06:54:51', '2020-08-07 06:54:51'),
-('c5332703cd744647aa847dab45b58d75', '1', '11fafa2d2cbd4456817504d69478be7b', '2020-08-07 06:54:51', '2020-08-07 06:54:51'),
-('e18cf52c7d0c42eb89426bfad71ef98c', '1', 'fe63a57226a84fc48dc303cd14f707b7', '2020-08-07 06:54:51', '2020-08-07 06:54:51'),
-('ea7d8aac4f8f4dfd98dbc44391892a55', '1', 'bcf17dc0ce304f0ba02d64ce21ddb4f9', '2020-08-07 06:54:51', '2020-08-07 06:54:51'),
-('f506348e68ca4a6f8acaaec4e9aceb59', '2', '35cb950cebb04bb18bb1d8b742a02xzz', '2020-08-07 07:31:11', '2020-08-07 07:31:11');
+('904869f804e94d5481563072a0a8d09f', '1', 'fe63a57226a84fc48dc303cd14f707b7', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('96dba17c03fc4d9dad0d23463378c107', '1', 'b9e5a8d943354e918b9b2e5d965ca0a6', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('ea347e05099a41c3afa2fef28cfee928', '1', 'bcf17dc0ce304f0ba02d64ce21ddb4f9', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('f506348e68ca4a6f8acaaec4e9aceb59', '2', '35cb950cebb04bb18bb1d8b742a02xzz', '2020-08-07 07:31:11', '2020-08-07 07:31:11'),
+('f822ccd241a8423a9f4503d14f70662a', '1', '74315e162f524a4d88aa931f02416f26', '2020-08-08 10:15:51', '2020-08-08 10:15:51');
 
 -- --------------------------------------------------------
 
@@ -375,10 +375,10 @@ CREATE TABLE `wallet_account` (
   `create_time` datetime DEFAULT NULL,
   `receive_account` varchar(255) DEFAULT NULL,
   `receive_address` varchar(255) DEFAULT NULL,
-  `receive_balance` varchar(255) DEFAULT NULL,
+  `receive_balance` decimal(19,2) DEFAULT NULL,
   `send_account` varchar(255) DEFAULT NULL,
   `send_address` varchar(255) DEFAULT NULL,
-  `send_balance` varchar(255) DEFAULT NULL,
+  `send_balance` decimal(19,2) DEFAULT NULL,
   `send_private_key` varchar(255) DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `user_id` varchar(255) DEFAULT NULL
@@ -389,9 +389,7 @@ CREATE TABLE `wallet_account` (
 --
 
 INSERT INTO `wallet_account` (`id`, `account_password`, `assets_id`, `create_time`, `receive_account`, `receive_address`, `receive_balance`, `send_account`, `send_address`, `send_balance`, `send_private_key`, `update_time`, `user_id`) VALUES
-('6b8f943ac52946a9a2c7c28d98ce457e', NULL, '16cd4f04344f4bbd95babeae768d23b4', '2020-08-07 05:35:09', '1_receive', 'aff', '', '1_send', 'MoRAdRgPTRDXxyA66hm8n7uuAjqx4JPPxg', '', 'aUz2Kr93CYbchf1iYPuM63qooUD88JxaemMmPMMo3Pynzqac9mXP', '2020-08-07 08:41:50', '1'),
-('f1df328845ff4f1fb334bba39cddf2f1', NULL, NULL, '2020-08-07 06:55:33', '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-08-07 06:55:33', NULL),
-('46658cc7013743c794fb5efef0e88de0', NULL, '16cd4f04344f4bbd95babeae768d23b4', '2020-08-07 07:31:11', '2_receive', NULL, NULL, '2_send', 'MtDgVHKab8KEHxvcmW73MxirLYp91wAwvR', NULL, 'aYyqCFiZfZvCPNw5iLCsDkyrSWHN5TtfL8KkK6ee9L4siyRveg1y', '2020-08-07 07:31:11', '2');
+('e4b182a580e8411f8ef9c52c09989c57', NULL, '16cd4f04344f4bbd95babeae768d23b4', '2020-08-08 10:15:51', '1_receive', 'Md5yVndUCMkG84okfR4VTDyA8DVTT2p9qx', '0.00', '1_send', 'MpxbMuBAspP3m1G2DyavKnsaiD46FPwYpz', '0.00', 'aU23KyZLQYPGTQ2Lc4fQG9z5JCxCV4kUZ98unzyStW1cT9JLwhji', '2020-08-08 10:17:39', '1');
 
 -- --------------------------------------------------------
 
@@ -418,7 +416,7 @@ CREATE TABLE `wallet_assets` (
 --
 
 INSERT INTO `wallet_assets` (`assets_id`, `assets_enable`, `assets_home`, `assets_introduction`, `assets_name`, `assets_name_zh`, `assets_symbol`, `create_time`, `last_block_height`, `last_block_time`, `update_time`) VALUES
-('16cd4f04344f4bbd95babeae768d23b4', b'1', 'projectpai.com', '介绍PAI', 'Project PAI', '1派', 'PAI', '2020-08-05 08:29:03', '59719', '2020-08-07 02:49:31', '2020-08-07 09:25:53'),
+('16cd4f04344f4bbd95babeae768d23b4', b'1', 'projectpai.com', '介绍PAI', 'Project PAI', '1派', 'PAI', '2020-08-05 08:29:03', '59733', '2020-08-07 07:21:05', '2020-08-08 10:19:26'),
 ('e7d5705c15dc466d9578e347cdbd12bb', b'0', '', '', 'bitcoin', '比特币', 'BTC', '2020-08-05 08:29:58', '', '2020-08-05 08:29:52', '2020-08-05 08:30:18');
 
 --
