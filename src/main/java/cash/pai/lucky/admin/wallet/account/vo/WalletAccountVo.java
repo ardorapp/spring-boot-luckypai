@@ -5,6 +5,7 @@ import cash.pai.lucky.admin.wallet.assets.vo.WalletAssetsVo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -21,7 +22,7 @@ public class WalletAccountVo extends PageCondition implements Serializable {
 
     private String receiveAddress;//接收地址
 
-    private String receiveBalance;//接收余额
+    private BigDecimal receiveBalance;//接收余额
 
     private String sendAccount;//发送账号
 
@@ -29,7 +30,7 @@ public class WalletAccountVo extends PageCondition implements Serializable {
 
     private String sendAddress;//发送地址
 
-    private String sendBalance;//发送余额
+    private BigDecimal sendBalance;//发送余额
 
     private String accountPassword;//账号密码
 

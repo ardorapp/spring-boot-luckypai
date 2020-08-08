@@ -7,6 +7,7 @@ import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -24,7 +25,7 @@ public class WalletAccount implements Serializable {
 
     private String receiveAddress;//接收地址
 
-    private String receiveBalance;//接收余额
+    private BigDecimal receiveBalance;//接收余额
 
     private String sendAccount;//发送账号
 
@@ -32,7 +33,7 @@ public class WalletAccount implements Serializable {
 
     private String sendAddress;//发送地址
 
-    private String sendBalance;//发送余额
+    private BigDecimal sendBalance;//发送余额
 
     private String accountPassword;//账号密码
 

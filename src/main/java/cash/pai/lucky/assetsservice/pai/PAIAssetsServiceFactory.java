@@ -7,6 +7,8 @@ import cash.pai.rpcclient.PaicoinJSONRPCClient;
 import cash.pai.rpcclient.PaicoindRpcClient;
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigDecimal;
+
 
 @Slf4j
 public class PAIAssetsServiceFactory implements AssetsServiceFactory {
@@ -83,5 +85,15 @@ public class PAIAssetsServiceFactory implements AssetsServiceFactory {
         } catch (Exception e) {
             log.error("importAddress error ",e);
         }
+    }
+
+    @Override
+    public BigDecimal getBalance(String account) {
+        try {
+            return paicoinJSONRPCClient.getBalance(account);
+        } catch (Exception e) {
+            log.error("importAddress error ",e);
+        }
+        return null;
     }
 }

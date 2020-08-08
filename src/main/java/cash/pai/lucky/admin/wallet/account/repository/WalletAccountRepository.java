@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface WalletAccountRepository extends CommonRepository<WalletAccount, String> {
     List<WalletAccount> findByUserId(String userId);
+
+    List<WalletAccount> findByUserIdAndAssetsId(String userId,String assetsId);
 }
