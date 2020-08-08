@@ -19,7 +19,7 @@ public class RedPacketDelayQueue {
 
     public static void main(String[] args) throws Exception {
         Config config = new Config();
-        config.useSingleServer().setAddress("redis://127.0.0.1:6379")
+        config.useSingleServer().setAddress("redis://192.168.171.128:6379")
                                 .setPassword("123456").setDatabase(2);
         RedissonClient redissonClient = Redisson.create(config);
 

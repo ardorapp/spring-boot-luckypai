@@ -19,6 +19,11 @@ import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * 启动时加载
+ */
+
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -88,18 +93,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/loginPage")
                 .permitAll()
                 .and();
-        http
-                //定制url访问权限，动态权限读取，参考：https://www.jianshu.com/p/0a06496e75ea
-                .addFilterAfter(dynamicallyUrlInterceptor(), FilterSecurityInterceptor.class)
+        http .addFilterAfter(dynamicallyUrlInterceptor(), FilterSecurityInterceptor.class)
                 .authorizeRequests()
-
-                //无需权限访问
-                .antMatchers("/favicon.ico","/common/**", "/webjars/**", "/getVerifyCodeImage","/error/*").permitAll()
-
+                /**
+                 * 添加例外url 不用登录就可以访问
+                 */
+                .antMatchers("/favicon.ico", "/common/**", "/webjars/**", "/getVerifyCodeImage", "/error/*", "/front/**","/swagger-ui.html").permitAll()
                 //其他接口需要登录后才能访问
                 .anyRequest().authenticated()
                 .and();
-
         http.sessionManagement()
                 //session无效处理策略
                 .invalidSessionStrategy(myInvalidSessionStrategy)
@@ -123,7 +125,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //配置filter
     @Bean
-    public DynamicallyUrlInterceptor dynamicallyUrlInterceptor(){
+    public DynamicallyUrlInterceptor dynamicallyUrlInterceptor() {
         //首次获取
         List<SysAuthorityVo> authorityVoList = sysAuthorityService.list(new SysAuthorityVo()).getData();
         myFilterInvocationSecurityMetadataSource.setRequestMap(authorityVoList);

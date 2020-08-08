@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cash.pai.lucky.dao.AuthorityDao">
+    <resultMap id="Authority" type="cash.pai.lucky.entity.AuthorityEntity">
+        <id property="authorityId" column="authority_id"/>
+        <result property="authorityName" column="authority_name"/>
+        <result property="authorityRemark" column="authority_remark"/>
+        <result property="authorityContent" column="authority_content"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        authority_id, authority_name,authority_remark,authority_content,create_time,update_time
+    </sql>
+
+    <select id="findById" resultMap="Authority" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        sys_authority
+        WHERE authority_id= #{authorityId}
+    </select>
+
+    <insert id="insert" parameterType="cash.pai.lucky.entity.AuthorityEntity">
+		insert into sys_user
+        (
+            authority_id, authority_name,authority_remark,authority_content,create_time,update_time
+        )
+		values
+		(   #{authorityId}, #{authorityName}, #{authorityRemark},#{authorityContent},#{createTime},#{updateTime} )
+	</insert>
+</mapper>
