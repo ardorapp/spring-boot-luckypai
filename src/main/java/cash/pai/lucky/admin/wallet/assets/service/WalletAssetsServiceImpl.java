@@ -52,6 +52,9 @@ public class WalletAssetsServiceImpl extends CommonServiceImpl<WalletAssetsVo, W
     @Autowired
     private WalletAccountRepository walletAccountRepository;
 
+    @Autowired
+    private AssetsServiceHub assetsServiceHub;
+
     @Override
     public Result<WalletAssetsVo> save(WalletAssetsVo entityVo) {
         //调用父类
@@ -63,8 +66,8 @@ public class WalletAssetsServiceImpl extends CommonServiceImpl<WalletAssetsVo, W
     @Scheduled(fixedRate=20000)
     protected void syncAssetsInfoTasks() {
         super.list(null).getData().forEach((assetsVo)->{
-            updateAssetsServiceInfo(assetsVo,AssetsServiceHub.getAssetsServiceFactory(assetsVo.getAssetsSymbol()));
-            updateAssetsAccountBalance(assetsVo,AssetsServiceHub.getAssetsServiceFactory(assetsVo.getAssetsSymbol()));
+            updateAssetsServiceInfo(assetsVo,assetsServiceHub.getAssetsServiceFactory(assetsVo.getAssetsSymbol()));
+            updateAssetsAccountBalance(assetsVo,assetsServiceHub.getAssetsServiceFactory(assetsVo.getAssetsSymbol()));
         });
     }
 

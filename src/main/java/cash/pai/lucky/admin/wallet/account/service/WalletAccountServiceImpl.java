@@ -38,10 +38,13 @@ public class WalletAccountServiceImpl extends CommonServiceImpl<WalletAccountVo,
     @Autowired
     private WalletAssetsService walletAssetsService;
 
+    @Autowired
+    private AssetsServiceHub assetsServiceHub;
+
     @Override
     public Result<WalletAccountVo> saveReceiveAddress(WalletAccountVo entityVo) {
         WalletAssetsVo walletAssetsVo = walletAssetsService.get(entityVo.getAssetsId()).getData();
-        AssetsServiceFactory serviceFactory = AssetsServiceHub.getAssetsServiceFactory(walletAssetsVo.getAssetsSymbol());
+        AssetsServiceFactory serviceFactory = assetsServiceHub.getAssetsServiceFactory(walletAssetsVo.getAssetsSymbol());
         if (!serviceFactory.validationAddress(entityVo.getReceiveAddress())) {
             return Result.of(entityVo,false,"地址不合法");
         }

@@ -73,6 +73,9 @@ public class SysUserServiceImpl extends CommonServiceImpl<SysUserVo, SysUser, St
     @Autowired
     private WalletAssetsService walletAssetsService;
 
+    @Autowired
+    private AssetsServiceHub assetsServiceHub;
+
     @Override
     public Result<String> delete(String id) {
         //删除权限关联表、菜单关联表、个性菜单关联表
@@ -186,7 +189,7 @@ public class SysUserServiceImpl extends CommonServiceImpl<SysUserVo, SysUser, St
                 walletAccountVo.setAssetsId(walletAssetsVo.getAssetsId());
                 walletAccountVo.setReceiveAccount(userId+"_receive");
                 walletAccountVo.setSendAccount(userId+"_send");
-                AssetsServiceFactory serviceFactory = AssetsServiceHub.getAssetsServiceFactory(walletAssetsVo.getAssetsSymbol());
+                AssetsServiceFactory serviceFactory = assetsServiceHub.getAssetsServiceFactory(walletAssetsVo.getAssetsSymbol());
                 String address = serviceFactory.getNewAddress();
                 String privateKey = serviceFactory.getPrivateKey(address);
                 walletAccountVo.setSendAddress(address);

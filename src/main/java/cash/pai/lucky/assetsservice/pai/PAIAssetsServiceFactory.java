@@ -6,18 +6,40 @@ import cash.pai.lucky.assetsservice.AssetsServiceInfo;
 import cash.pai.rpcclient.PaicoinJSONRPCClient;
 import cash.pai.rpcclient.PaicoindRpcClient;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 
 
 @Slf4j
+@Component
 public class PAIAssetsServiceFactory implements AssetsServiceFactory {
+
+    @Value("${assets.pai.rpcconnect}")
+    private String rpcconnect;
+
+    @Value("${assets.pai.rpcport}")
+    private String rpcport;
+
+    @Value("${assets.pai.rpcuser}")
+    private String rpcuser;
+
+    @Value("${assets.pai.rpcpassword}")
+    private String rpcpassword;
 
     private PaicoinJSONRPCClient paicoinJSONRPCClient;
 
-    public PAIAssetsServiceFactory() {
-        this.paicoinJSONRPCClient = new PaicoinJSONRPCClient();
+    @Override
+    public void initService() {
+        try {
+            String rpcUrl="http://" + rpcuser + ':' + rpcpassword + "@" + rpcconnect + ":" + rpcport + "/";
+            this.paicoinJSONRPCClient = new PaicoinJSONRPCClient(rpcUrl);
+        }catch (Exception e){
+            log.error("connect to PAI core error:",e);
+        }
     }
 
     @Override

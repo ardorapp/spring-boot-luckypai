@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 
 public interface AssetsServiceFactory {
 
+    void initService();
+
     String assetsSymbol();
 
     AssetsServiceInfo getAssetsServiceInfo();
