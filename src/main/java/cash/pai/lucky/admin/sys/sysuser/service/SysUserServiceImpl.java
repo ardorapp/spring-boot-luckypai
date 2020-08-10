@@ -15,13 +15,12 @@ import cash.pai.lucky.admin.sys.sysusermenu.vo.SysUserMenuVo;
 import cash.pai.lucky.admin.util.CopyUtil;
 import cash.pai.lucky.admin.util.MD5Util;
 import cash.pai.lucky.admin.util.SqlUtil;
-import cash.pai.lucky.admin.wallet.account.service.WalletAccountService;
-import cash.pai.lucky.admin.wallet.account.vo.WalletAccountVo;
-import cash.pai.lucky.admin.wallet.assets.pojo.WalletAssets;
-import cash.pai.lucky.admin.wallet.assets.service.WalletAssetsService;
-import cash.pai.lucky.admin.wallet.assets.vo.WalletAssetsVo;
-import cash.pai.lucky.assetsservice.AssetsServiceFactory;
-import cash.pai.lucky.assetsservice.AssetsServiceHub;
+import cash.pai.lucky.assets.account.service.AssetsAccountService;
+import cash.pai.lucky.assets.account.vo.AssetsAccountVo;
+import cash.pai.lucky.assets.info.service.AssetsInfoService;
+import cash.pai.lucky.assets.info.vo.AssetsInfoVo;
+import cash.pai.lucky.assets.service.AssetsServiceFactory;
+import cash.pai.lucky.assets.service.AssetsServiceHub;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.query.internal.NativeQueryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,10 +67,10 @@ public class SysUserServiceImpl extends CommonServiceImpl<SysUserVo, SysUser, St
     private DataSource dataSource;
 
     @Autowired
-    private WalletAccountService walletAccountService;
+    private AssetsAccountService walletAccountService;
 
     @Autowired
-    private WalletAssetsService walletAssetsService;
+    private AssetsInfoService walletAssetsService;
 
     @Autowired
     private AssetsServiceHub assetsServiceHub;
@@ -174,17 +173,17 @@ public class SysUserServiceImpl extends CommonServiceImpl<SysUserVo, SysUser, St
 
     private void genWalletAccount(String userId) {
         //如果该用户还没有对应的资产账号，则生成钱包账号数据，若已存在，则不需要生成。
-        List<WalletAssetsVo> list = walletAssetsService.findByAssetsEnable(true).getData();
+        List<AssetsInfoVo> list = walletAssetsService.findByAssetsEnable(true).getData();
         if (list == null) {
             return;
         }
         list.forEach((walletAssetsVo)->{
-            List<WalletAccountVo> accounts = walletAccountService.findByUserId(userId);
+            List<AssetsAccountVo> accounts = walletAccountService.findByUserId(userId);
             if (accounts != null && accounts.size() > 0) {
                 log.info("existing "+userId+" " + walletAssetsVo.getAssetsSymbol() +" Assets account " + accounts.get(0));
             } else {
                 //该资产账号不存在，则新增一个账号数据。
-                WalletAccountVo walletAccountVo = new WalletAccountVo();
+                AssetsAccountVo walletAccountVo = new AssetsAccountVo();
                 walletAccountVo.setUserId(userId);
                 walletAccountVo.setAssetsId(walletAssetsVo.getAssetsId());
                 walletAccountVo.setReceiveAccount(userId+"_receive");
@@ -194,7 +193,7 @@ public class SysUserServiceImpl extends CommonServiceImpl<SysUserVo, SysUser, St
                 String privateKey = serviceFactory.getPrivateKey(address);
                 walletAccountVo.setSendAddress(address);
                 walletAccountVo.setSendPrivateKey(privateKey);
-                Result<WalletAccountVo> result = walletAccountService.save(walletAccountVo);
+                Result<AssetsAccountVo> result = walletAccountService.save(walletAccountVo);
                 serviceFactory.importPrivateKey(privateKey,walletAccountVo.getSendAccount());
                 log.info("add "+userId+" " + walletAssetsVo.getAssetsSymbol() +" Assets account " + result.getData());
             }

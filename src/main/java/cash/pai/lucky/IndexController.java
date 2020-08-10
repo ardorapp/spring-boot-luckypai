@@ -9,8 +9,7 @@ import cash.pai.lucky.admin.sys.sysuser.service.SysUserService;
 import cash.pai.lucky.admin.sys.sysuser.vo.SysUserVo;
 import cash.pai.lucky.admin.sys.sysusermenu.service.SysUserMenuService;
 import cash.pai.lucky.admin.util.*;
-import cash.pai.lucky.admin.wallet.account.service.WalletAccountService;
-import cash.pai.lucky.assetsservice.AssetsServiceHub;
+import cash.pai.lucky.assets.account.service.AssetsAccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,7 +50,7 @@ public class IndexController {
     private SysShortcutMenuService sysShortcutMenuService;
 
     @Autowired
-    private WalletAccountService walletAccountService;
+    private AssetsAccountService assetsAccountService;
 
     /**
      * 端口
