@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 172.20.0.11:3306
--- 生成日期： 2020-07-29 05:49:07
+-- 生成日期： 2020-08-08 10:19:44
 -- 服务器版本： 8.0.21
 -- PHP 版本： 7.4.5
 
@@ -60,8 +60,7 @@ CREATE TABLE `persistent_logins` (
 --
 
 INSERT INTO `persistent_logins` (`series`, `username`, `token`) VALUES
-('Wc+I+hpiiR1jDR3dcP6wuQ==', 'sa', 'juIeh5ryqdIe5PVsP0v15A=='),
-('yUBKe4YnjJtuscUfs51+TA==', 'sa', 'YgI5IXI+wrRhDr8NMTDz4Q==');
+('zc+jPvjA8yO1pwX+fRlaZQ==', 'sa', 'PmKnAmg+oOWlbIskKAf6DQ==');
 
 -- --------------------------------------------------------
 
@@ -178,7 +177,7 @@ CREATE TABLE `sys_authority` (
 
 INSERT INTO `sys_authority` (`authority_id`, `authority_name`, `authority_remark`, `create_time`, `update_time`, `authority_content`) VALUES
 ('3fb1c570496d4c09ab99b8d31b06ccc', 'ROLE_USER', '普通用户', '2019-09-10 10:08:58', '2019-09-10 10:08:58', ''),
-('3fb1c570496d4c09ab99b8d31b06xxx', 'ROLE_SA', '超级管理员', '2019-09-10 10:08:58', '2019-09-10 10:08:58', '/sys/**,/logging'),
+('3fb1c570496d4c09ab99b8d31b06xxx', 'ROLE_SA', '超级管理员', '2019-09-10 10:08:58', '2019-09-10 10:08:58', '/sys/**,/logging,/lucky/**'),
 ('3fb1c570496d4c09ab99b8d31b06zzz', 'ROLE_ADMIN', '管理员', '2019-09-10 10:08:58', '2019-09-10 10:08:58', '/sys/**');
 
 -- --------------------------------------------------------
@@ -201,6 +200,7 @@ CREATE TABLE `sys_menu` (
 --
 
 INSERT INTO `sys_menu` (`menu_id`, `menu_name`, `menu_path`, `menu_parent_id`, `create_time`, `update_time`) VALUES
+('11fafa2d2cbd4456817504d69478be7b', '账号管理', '/wallet/account/setting', 'bcf17dc0ce304f0ba02d64ce21ddb43d', '2020-08-04 12:32:57', '2020-08-04 12:32:57'),
 ('35cb950cebb04bb18bb1d8b742a02005', 'XXX菜单', '/xxx', '', '2019-09-11 18:05:21', '2019-09-11 18:05:21'),
 ('35cb950cebb04bb18bb1d8b742a02xaa', '权限管理', '/sys/sysAuthority/authority', '35cb950cebb04bb18bb1d8b742a02xxx', '2019-09-10 10:08:58', '2019-09-10 10:08:58'),
 ('35cb950cebb04bb18bb1d8b742a02xcc', '菜单管理', '/sys/sysMenu/menu', '35cb950cebb04bb18bb1d8b742a02xxx', '2019-09-10 10:08:58', '2019-09-10 10:08:58'),
@@ -208,7 +208,11 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_name`, `menu_path`, `menu_parent_id`, `
 ('35cb950cebb04bb18bb1d8b742a02xzz', '用户管理', '/sys/sysUser/user', '35cb950cebb04bb18bb1d8b742a02xxx', '2019-09-10 10:08:58', '2019-09-10 10:08:58'),
 ('74315e162f524a4d88aa931f02416f26', '实时监控', '/monitor', '35cb950cebb04bb18bb1d8b742a02xxx', '2020-06-10 15:07:07', '2020-06-10 15:07:07'),
 ('914aa22c78af4327822061f3eada4067', '实时日志', '/logging', '35cb950cebb04bb18bb1d8b742a02xxx', '2019-09-11 11:19:52', '2019-09-11 11:19:52'),
-('bcf17dc0ce304f0ba02d64ce21ddb4f9', '系统设置', '/sys/sysSetting/setting', '35cb950cebb04bb18bb1d8b742a02xxx', '2019-09-17 10:46:11', '2019-09-17 10:46:11');
+('b9e5a8d943354e918b9b2e5d965ca0a6', '发红包', '/lucky/redPacket/create', 'bcf17dc0ce304f0ba02d64ce21ddb43d', '2020-08-04 12:29:44', '2020-08-04 12:29:44'),
+('bcf17dc0ce304f0ba02d64ce21ddb43d', '红包管理', '/lucky', '', '2019-09-17 10:46:11', '2019-09-17 10:46:11'),
+('bcf17dc0ce304f0ba02d64ce21ddb4f9', '系统设置', '/sys/sysSetting/setting', '35cb950cebb04bb18bb1d8b742a02xxx', '2019-09-17 10:46:11', '2019-09-17 10:46:11'),
+('f65e2aa5ade94ca9a9e2994c9fbf3c58', '资产设置', '/wallet/assets/setting', '35cb950cebb04bb18bb1d8b742a02xxx', '2020-08-05 06:25:07', '2020-08-05 06:25:07'),
+('fe63a57226a84fc48dc303cd14f707b7', '收红包', '/lucky/redPacket/receive', 'bcf17dc0ce304f0ba02d64ce21ddb43d', '2020-08-04 13:03:00', '2020-08-04 13:03:00');
 
 -- --------------------------------------------------------
 
@@ -234,7 +238,7 @@ CREATE TABLE `sys_setting` (
 --
 
 INSERT INTO `sys_setting` (`id`, `sys_name`, `sys_logo`, `sys_bottom_text`, `sys_notice_text`, `create_time`, `update_time`, `user_init_password`, `sys_color`, `sys_api_encrypt`) VALUES
-('1', 'Base Admin', 'https://avatar.gitee.com/uploads/0/5137900_huanzi-qch.png!avatar100?1562729811', '© 2019 - 2020  XXX系统', '<h1 style=\"white-space: normal; text-align: center;\"><span style=\"color: rgb(255, 0, 0);\">通知</span></h1><p style=\"white-space: normal;\"><span style=\"color: rgb(255, 0, 0);\">1、不得在公共场合吸烟；</span></p><p style=\"white-space: normal;\"><span style=\"color: rgb(255, 0, 0);\">2、xxxxxxx；</span></p><p><br/></p>', '2019-09-17 10:15:38', '2019-09-17 10:15:40', '123456', 'rgba(54, 123, 183,  0.73)', 'Y');
+('1', 'Lucky PAI', 'https://avatar.gitee.com/uploads/0/5137900_huanzi-qch.png!avatar100?1562729811', '© 2019 - 2020  Lucky PAI', '<h1 style=\"white-space: normal; text-align: center;\"><span style=\"color: rgb(255, 0, 0);\">通知</span></h1><p style=\"white-space: normal;\"><span style=\"color: rgb(255, 0, 0);\">1、不得在公共场sf合吸烟；afsafsf</span></p><p style=\"white-space: normal;\"><span style=\"color: rgb(255, 0, 0);\">2、xxxxxxx；</span></p><p>ff<br/></p>', '2019-09-17 10:15:38', '2019-09-17 10:15:40', '123456', 'rgba(54, 123, 183,  0.73)', 'Y');
 
 -- --------------------------------------------------------
 
@@ -259,8 +263,9 @@ CREATE TABLE `sys_shortcut_menu` (
 INSERT INTO `sys_shortcut_menu` (`shortcut_menu_id`, `shortcut_menu_name`, `shortcut_menu_path`, `user_id`, `shortcut_menu_parent_id`, `create_time`, `update_time`) VALUES
 ('104370a3fa7948bab156afd4a5f2a730', '个性化菜单', '', '1', '', '2019-09-12 18:35:13', '2019-09-12 18:35:13'),
 ('72d94b41b9994038bd2f2135a1de28d8', '快捷菜单', '', 'b5ac62e154964151a19c565346bb354a', '', '2019-09-17 14:36:28', '2019-09-17 14:36:28'),
+('86bedbab7530477494883f65fed47f11', '撒放', '', '1', '', '2020-07-29 10:39:30', '2020-07-29 10:39:30'),
 ('88353f04ad5d47b182c984bfbb1693cc', 'ggg', '/xxx', 'b5ac62e154964151a19c565346bb354a', '72d94b41b9994038bd2f2135a1de28d8', '2019-09-17 14:36:50', '2019-09-17 14:36:50'),
-('cf78ced9ce7b480c85812540d1936145', '百度', 'https://www.baidu.com', '1', '104370a3fa7948bab156afd4a5f2a730', '2019-09-12 18:35:39', '2019-09-12 18:35:39');
+('89d01bbd915b418e9b0fab09c4c7b94c', '是否', 'jshfius', '1', '', '2020-07-29 10:41:10', '2020-07-29 10:41:10');
 
 -- --------------------------------------------------------
 
@@ -287,10 +292,10 @@ CREATE TABLE `sys_user` (
 --
 
 INSERT INTO `sys_user` (`user_id`, `login_name`, `user_name`, `password`, `valid`, `limited_ip`, `expired_time`, `last_change_pwd_time`, `limit_multi_login`, `create_time`, `update_time`) VALUES
-('1', 'sa', '超级管理员', 'E10ADC3949BA59ABBE56E057F20F883E', 'Y', '', NULL, '2019-09-17 12:00:36', 'Y', '2019-07-19 16:36:03', '2019-09-17 12:00:36'),
-('2', 'admin', '管理员', 'E10ADC3949BA59ABBE56E057F20F883E', 'Y', '', NULL, '2019-09-17 12:00:36', 'N', '2019-07-19 16:36:03', '2019-09-12 16:14:28'),
+('1', 'sa', '超级管理员', 'E10ADC3949BA59ABBE56E057F20F883E', 'Y', '', NULL, '2019-09-17 12:00:36', 'Y', '2019-07-19 16:36:03', '2020-08-08 10:15:50'),
+('2', 'admin', '管理员', 'E10ADC3949BA59ABBE56E057F20F883E', 'Y', '', NULL, '2019-09-17 12:00:36', 'N', '2019-07-19 16:36:03', '2020-08-07 07:31:10'),
 ('3fb1c570496d4c09ab99b8d31b0671cf', 'daji', '妲己', 'E10ADC3949BA59ABBE56E057F20F883E', 'Y', '', NULL, '2019-09-17 12:00:36', 'Y', '2019-09-11 18:11:41', '2019-09-17 12:09:47'),
-('b5ac62e154964151a19c565346bb354a', 'xiaofang', '小芳', '96E79218965EB72C92A549DD5A330112', 'Y', '', NULL, '2019-09-17 12:00:36', 'N', '2019-09-17 14:12:41', '2020-07-28 14:41:47');
+('b5ac62e154964151a19c565346bb354a', 'xiaofang', '小芳', 'E10ADC3949BA59ABBE56E057F20F883E', 'Y', '', NULL, '2019-09-17 12:00:36', 'N', '2019-09-17 14:12:41', '2020-07-28 14:41:47');
 
 -- --------------------------------------------------------
 
@@ -311,13 +316,13 @@ CREATE TABLE `sys_user_authority` (
 --
 
 INSERT INTO `sys_user_authority` (`user_authority_id`, `user_id`, `authority_id`, `create_time`, `update_time`) VALUES
-('0dc1b156ed544c0986823e9cd818da08', '2', '3fb1c570496d4c09ab99b8d31b06ccc', '2019-09-12 16:14:28', '2019-09-12 16:14:28'),
+('0704bcfe6f974bc8bf6c11d13115ecc9', '2', '3fb1c570496d4c09ab99b8d31b06zzz', '2020-08-07 07:31:11', '2020-08-07 07:31:11'),
+('4c331da2da7a4357b5cac4ffc3c4fb63', '2', '3fb1c570496d4c09ab99b8d31b06ccc', '2020-08-07 07:31:11', '2020-08-07 07:31:11'),
+('776521eef2ca4c3ebfd0ed712a220627', '1', '3fb1c570496d4c09ab99b8d31b06xxx', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('8e38735f83d4466b921360b5e74d2e5c', '1', '3fb1c570496d4c09ab99b8d31b06zzz', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
 ('90c18739f3ad41ae8010f6c2b7eeaac5', '3fb1c570496d4c09ab99b8d31b0671cf', '3fb1c570496d4c09ab99b8d31b06ccc', '2019-09-17 12:09:47', '2019-09-17 12:09:47'),
-('9ca34956ceae4af0a74f4931344e9d1b', '1', '3fb1c570496d4c09ab99b8d31b06ccc', '2019-09-17 12:00:37', '2019-09-17 12:00:37'),
-('a414567aaae54b42b8344da02795cb91', '2', '3fb1c570496d4c09ab99b8d31b06zzz', '2019-09-12 16:14:28', '2019-09-12 16:14:28'),
-('b34f7092406c46189fee2690d9f6e493', '1', '3fb1c570496d4c09ab99b8d31b06xxx', '2019-09-17 12:00:37', '2019-09-17 12:00:37'),
-('dd46ed0e01e24855b5430a9dc8d416f3', 'b5ac62e154964151a19c565346bb354a', '3fb1c570496d4c09ab99b8d31b06ccc', '2020-07-28 14:41:48', '2020-07-28 14:41:48'),
-('f6514b57d1524afd8dfa7cb2c3ca6a11', '1', '3fb1c570496d4c09ab99b8d31b06zzz', '2019-09-17 12:00:37', '2019-09-17 12:00:37');
+('b8aa98bf26ee4406a21592790be4a8c9', '1', '3fb1c570496d4c09ab99b8d31b06ccc', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('dd46ed0e01e24855b5430a9dc8d416f3', 'b5ac62e154964151a19c565346bb354a', '3fb1c570496d4c09ab99b8d31b06ccc', '2020-07-28 14:41:48', '2020-07-28 14:41:48');
 
 -- --------------------------------------------------------
 
@@ -338,19 +343,81 @@ CREATE TABLE `sys_user_menu` (
 --
 
 INSERT INTO `sys_user_menu` (`user_menu_id`, `user_id`, `menu_id`, `create_time`, `update_time`) VALUES
+('03ae4743ad0f4695bcb66e6f5f3e86ef', '1', '914aa22c78af4327822061f3eada4067', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
 ('05acfd5ff2074081ac8cfcea6f33767e', 'b5ac62e154964151a19c565346bb354a', '35cb950cebb04bb18bb1d8b742a02005', '2020-07-28 14:41:48', '2020-07-28 14:41:48'),
-('1337996a0aba460bbf0b82db9a1da207', '1', '35cb950cebb04bb18bb1d8b742a02xxx', '2020-06-10 15:07:23', '2020-06-10 15:07:23'),
-('3232782f25ec44b09438ab9805b85f83', '2', '35cb950cebb04bb18bb1d8b742a02xcc', '2019-09-12 16:14:28', '2019-09-12 16:14:28'),
-('39d6a157972e400fabcd753d3766efc9', '1', '35cb950cebb04bb18bb1d8b742a02xaa', '2020-06-10 15:07:23', '2020-06-10 15:07:23'),
-('3b0a160e8c624b2f86918afcd5107704', '1', '35cb950cebb04bb18bb1d8b742a02xcc', '2020-06-10 15:07:23', '2020-06-10 15:07:23'),
-('57791437b9774d8abf74562a49c55a1a', '2', '35cb950cebb04bb18bb1d8b742a02xxx', '2019-09-12 16:14:28', '2019-09-12 16:14:28'),
-('6afadafdc36c426182853761bf68d870', '1', '74315e162f524a4d88aa931f02416f26', '2020-06-10 15:07:23', '2020-06-10 15:07:23'),
+('0db1262140ee43c89e03c5e6559f8980', '1', '35cb950cebb04bb18bb1d8b742a02xxx', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('0e6933667468467c963c1aea02634b43', '1', 'f65e2aa5ade94ca9a9e2994c9fbf3c58', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('11631147c1454bcdb048ced81489bec3', '1', '35cb950cebb04bb18bb1d8b742a02xzz', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('13cb953c0e82430eaf6b725bd3bdc75c', '2', '35cb950cebb04bb18bb1d8b742a02xaa', '2020-08-07 07:31:11', '2020-08-07 07:31:11'),
+('1aa88a6facef432ba5ecce21bc55c81d', '1', 'bcf17dc0ce304f0ba02d64ce21ddb43d', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('37e0e28930d44c1397995d73f5f8056e', '1', '35cb950cebb04bb18bb1d8b742a02xcc', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('5933a870b5c645acadf4219cca545c2d', '1', '35cb950cebb04bb18bb1d8b742a02xaa', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('5b6a613ecaa64fc399095ee10df2d9de', '1', '11fafa2d2cbd4456817504d69478be7b', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('5da85598444b44a19e0e2147a0a0093b', '2', '35cb950cebb04bb18bb1d8b742a02xcc', '2020-08-07 07:31:11', '2020-08-07 07:31:11'),
 ('6e8fe2b9307a4855ba7d006dc17c97ae', '3fb1c570496d4c09ab99b8d31b0671cf', '35cb950cebb04bb18bb1d8b742a02005', '2019-09-17 12:09:47', '2019-09-17 12:09:47'),
-('81f4999dde514e0ea43acfc70bfd35a8', '1', '914aa22c78af4327822061f3eada4067', '2020-06-10 15:07:23', '2020-06-10 15:07:23'),
-('9f8ccddc9fa84e0b9ff74128d20e9024', '2', '35cb950cebb04bb18bb1d8b742a02xaa', '2019-09-12 16:14:28', '2019-09-12 16:14:28'),
-('c4220e4602fd4f2ca70da046466c6b45', '2', '35cb950cebb04bb18bb1d8b742a02xzz', '2019-09-12 16:14:28', '2019-09-12 16:14:28'),
-('cdf8f786c658437ba77eb7d7fdd6b9cb', '1', '35cb950cebb04bb18bb1d8b742a02xzz', '2020-06-10 15:07:23', '2020-06-10 15:07:23'),
-('d646090ba4114c85b0a2fc2c9082a188', '1', 'bcf17dc0ce304f0ba02d64ce21ddb4f9', '2020-06-10 15:07:23', '2020-06-10 15:07:23');
+('77d6929d2e614cb1be334adece1f741b', '2', '35cb950cebb04bb18bb1d8b742a02xxx', '2020-08-07 07:31:11', '2020-08-07 07:31:11'),
+('904869f804e94d5481563072a0a8d09f', '1', 'fe63a57226a84fc48dc303cd14f707b7', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('96dba17c03fc4d9dad0d23463378c107', '1', 'b9e5a8d943354e918b9b2e5d965ca0a6', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('ea347e05099a41c3afa2fef28cfee928', '1', 'bcf17dc0ce304f0ba02d64ce21ddb4f9', '2020-08-08 10:15:51', '2020-08-08 10:15:51'),
+('f506348e68ca4a6f8acaaec4e9aceb59', '2', '35cb950cebb04bb18bb1d8b742a02xzz', '2020-08-07 07:31:11', '2020-08-07 07:31:11'),
+('f822ccd241a8423a9f4503d14f70662a', '1', '74315e162f524a4d88aa931f02416f26', '2020-08-08 10:15:51', '2020-08-08 10:15:51');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `wallet_account`
+--
+
+CREATE TABLE `wallet_account` (
+  `id` varchar(255) NOT NULL,
+  `account_password` varchar(255) DEFAULT NULL,
+  `assets_id` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `receive_account` varchar(255) DEFAULT NULL,
+  `receive_address` varchar(255) DEFAULT NULL,
+  `receive_balance` decimal(19,2) DEFAULT NULL,
+  `send_account` varchar(255) DEFAULT NULL,
+  `send_address` varchar(255) DEFAULT NULL,
+  `send_balance` decimal(19,2) DEFAULT NULL,
+  `send_private_key` varchar(255) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `user_id` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `wallet_account`
+--
+
+INSERT INTO `wallet_account` (`id`, `account_password`, `assets_id`, `create_time`, `receive_account`, `receive_address`, `receive_balance`, `send_account`, `send_address`, `send_balance`, `send_private_key`, `update_time`, `user_id`) VALUES
+('e4b182a580e8411f8ef9c52c09989c57', NULL, '16cd4f04344f4bbd95babeae768d23b4', '2020-08-08 10:15:51', '1_receive', 'Md5yVndUCMkG84okfR4VTDyA8DVTT2p9qx', '0.00', '1_send', 'MpxbMuBAspP3m1G2DyavKnsaiD46FPwYpz', '0.00', 'aU23KyZLQYPGTQ2Lc4fQG9z5JCxCV4kUZ98unzyStW1cT9JLwhji', '2020-08-08 10:17:39', '1');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `wallet_assets`
+--
+
+CREATE TABLE `wallet_assets` (
+  `assets_id` varchar(255) NOT NULL,
+  `assets_enable` bit(1) DEFAULT NULL,
+  `assets_home` varchar(255) DEFAULT NULL,
+  `assets_introduction` varchar(255) DEFAULT NULL,
+  `assets_name` varchar(255) DEFAULT NULL,
+  `assets_name_zh` varchar(255) DEFAULT NULL,
+  `assets_symbol` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `last_block_height` varchar(255) DEFAULT NULL,
+  `last_block_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `wallet_assets`
+--
+
+INSERT INTO `wallet_assets` (`assets_id`, `assets_enable`, `assets_home`, `assets_introduction`, `assets_name`, `assets_name_zh`, `assets_symbol`, `create_time`, `last_block_height`, `last_block_time`, `update_time`) VALUES
+('16cd4f04344f4bbd95babeae768d23b4', b'1', 'projectpai.com', '介绍PAI', 'Project PAI', '1派', 'PAI', '2020-08-05 08:29:03', '59733', '2020-08-07 07:21:05', '2020-08-08 10:19:26'),
+('e7d5705c15dc466d9578e347cdbd12bb', b'0', '', '', 'bitcoin', '比特币', 'BTC', '2020-08-05 08:29:58', '', '2020-08-05 08:29:52', '2020-08-05 08:30:18');
 
 --
 -- 转储表的索引
@@ -435,6 +502,19 @@ ALTER TABLE `sys_user_menu`
   ADD PRIMARY KEY (`user_menu_id`) USING BTREE,
   ADD KEY `FK6va8c3wvegutnirrjla5dqpnn` (`menu_id`),
   ADD KEY `FKfqsgyqt79xa4wybipbli5e0pn` (`user_id`);
+
+--
+-- 表的索引 `wallet_account`
+--
+ALTER TABLE `wallet_account`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK45oh97f6yiexj35gava2to8ha` (`assets_id`);
+
+--
+-- 表的索引 `wallet_assets`
+--
+ALTER TABLE `wallet_assets`
+  ADD PRIMARY KEY (`assets_id`);
 
 --
 -- 在导出的表使用AUTO_INCREMENT

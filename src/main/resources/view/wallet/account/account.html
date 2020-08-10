@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--解决idea thymeleaf 表达式模板报红波浪线-->
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 引入公用部分 -->
+    <script th:replace="common/head::static"></script>
+    <!-- 样式 -->
+    <link th:href="@{/wallet/account/css/account.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="layui-row layui-col-space15">
+    <!-- 树 -->
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-header">资产账号列表</div>
+            <div class="layui-card-body">
+                <!-- 表格主体 -->
+                <table class="layui-hide" id="accountTable" lay-filter="test"></table>
+                <!-- 模板 -->
+                <script type="text/html" id="accountTableBarDemo">
+                    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑<i class="layui-icon layui-icon-edit"></i></a>
+                </script>
+            </div>
+        </div>
+    </div>
+    <!-- 操作表单 -->
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-header">操作表单</div>
+            <div class="layui-card-body">
+                <form id="accountForm" class="layui-form layui-form-pane">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">资产名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="assetsSymbol" autocomplete="off" placeholder="资产名称"
+                                   class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">接收红包地址</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="receiveAddress" autocomplete="off" placeholder="接收红包地址"
+                                   class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">已收红包金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="receiveBalance" autocomplete="off" placeholder="已收红包金额"
+                                   class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">发送红包地址</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="sendAddress" autocomplete="off" placeholder="发送红包地址"
+                                   class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">待发红包余额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="sendBalance" autocomplete="off" placeholder="待发红包余额"
+                                   class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">创建时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="createTime" autocomplete="off" placeholder="创建时间"
+                                   class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">更新时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="updateTime" autocomplete="off" placeholder="更新时间"
+                                   class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <!-- 隐藏域 -->
+                    <input type="text" name="id" hidden="hidden"/>
+                    <input type="text" name="userId" hidden="hidden"/>
+                    <input type="text" name="assetsId" hidden="hidden"/>
+                    <input type="text" name="receiveAccount" hidden="hidden"/>
+                </form>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <a class="layui-btn" onclick="accountFormSave()">保存</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!-- js -->
+<script th:src="@{/wallet/account/js/account.js}"></script>
+</html>
