@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 172.20.0.11:3306
--- 生成日期： 2020-08-10 06:36:34
+-- 生成日期： 2020-08-10 11:43:42
 -- 服务器版本： 8.0.21
 -- PHP 版本： 7.4.5
 
@@ -20,6 +20,63 @@ SET time_zone = "+00:00";
 --
 -- 数据库： `luckypai`
 --
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `assets_account`
+--
+
+CREATE TABLE `assets_account` (
+  `id` varchar(255) NOT NULL,
+  `account_password` varchar(255) DEFAULT NULL,
+  `assets_id` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `receive_account` varchar(255) DEFAULT NULL,
+  `receive_address` varchar(255) DEFAULT NULL,
+  `receive_balance` decimal(19,2) DEFAULT NULL,
+  `send_account` varchar(255) DEFAULT NULL,
+  `send_address` varchar(255) DEFAULT NULL,
+  `send_balance` decimal(19,2) DEFAULT NULL,
+  `send_private_key` varchar(255) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `user_id` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `assets_account`
+--
+
+INSERT INTO `assets_account` (`id`, `account_password`, `assets_id`, `create_time`, `receive_account`, `receive_address`, `receive_balance`, `send_account`, `send_address`, `send_balance`, `send_private_key`, `update_time`, `user_id`) VALUES
+('e4b182a580e8411f8ef9c52c09989c57', NULL, '16cd4f04344f4bbd95babeae768d23b4', '2020-08-08 10:15:51', '1_receive', 'Md5yVndUCMkG84okfR4VTDyA8DVTT2p9qx', '0.00', '1_send', 'MpxbMuBAspP3m1G2DyavKnsaiD46FPwYpz', '0.00', 'aU23KyZLQYPGTQ2Lc4fQG9z5JCxCV4kUZ98unzyStW1cT9JLwhji', '2020-08-10 11:36:06', '1');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `assets_info`
+--
+
+CREATE TABLE `assets_info` (
+  `assets_id` varchar(255) NOT NULL,
+  `assets_enable` bit(1) DEFAULT NULL,
+  `assets_home` varchar(255) DEFAULT NULL,
+  `assets_introduction` varchar(255) DEFAULT NULL,
+  `assets_name` varchar(255) DEFAULT NULL,
+  `assets_name_zh` varchar(255) DEFAULT NULL,
+  `assets_symbol` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `last_block_height` varchar(255) DEFAULT NULL,
+  `last_block_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `assets_info`
+--
+
+INSERT INTO `assets_info` (`assets_id`, `assets_enable`, `assets_home`, `assets_introduction`, `assets_name`, `assets_name_zh`, `assets_symbol`, `create_time`, `last_block_height`, `last_block_time`, `update_time`) VALUES
+('16cd4f04344f4bbd95babeae768d23b4', b'1', 'projectpai.com', '介绍PAI', 'Project PAI', '派d', 'PAI', '2020-08-05 08:29:03', '59843', '2020-08-10 09:20:23', '2020-08-10 11:43:29'),
+('e7d5705c15dc466d9578e347cdbd12bb', b'0', '', '', 'bitcoin', '比特币', 'BTC', '2020-08-05 08:29:58', '', '2020-08-05 08:29:52', '2020-08-05 08:30:18');
 
 -- --------------------------------------------------------
 
@@ -60,7 +117,7 @@ CREATE TABLE `persistent_logins` (
 --
 
 INSERT INTO `persistent_logins` (`series`, `username`, `token`) VALUES
-('6TXmpGpwcb3cK1Ai/rGojw==', 'sa', 'edLYDj+Wi0VnGp3xzEqrKw==');
+('Y86NCwjQdxObqwTfqp71Gw==', 'sa', 'FMH7iIzToCG8To4D2rosiw==');
 
 -- --------------------------------------------------------
 
@@ -200,7 +257,7 @@ CREATE TABLE `sys_menu` (
 --
 
 INSERT INTO `sys_menu` (`menu_id`, `menu_name`, `menu_path`, `menu_parent_id`, `create_time`, `update_time`) VALUES
-('11fafa2d2cbd4456817504d69478be7b', '账号管理', '/wallet/account/setting', 'bcf17dc0ce304f0ba02d64ce21ddb43d', '2020-08-04 12:32:57', '2020-08-04 12:32:57'),
+('11fafa2d2cbd4456817504d69478be7b', '账号管理', '/assets/account/setting', 'bcf17dc0ce304f0ba02d64ce21ddb43d', '2020-08-04 12:32:57', '2020-08-04 12:32:57'),
 ('35cb950cebb04bb18bb1d8b742a02005', 'XXX菜单', '/xxx', '', '2019-09-11 18:05:21', '2019-09-11 18:05:21'),
 ('35cb950cebb04bb18bb1d8b742a02xaa', '权限管理', '/sys/sysAuthority/authority', '35cb950cebb04bb18bb1d8b742a02xxx', '2019-09-10 10:08:58', '2019-09-10 10:08:58'),
 ('35cb950cebb04bb18bb1d8b742a02xcc', '菜单管理', '/sys/sysMenu/menu', '35cb950cebb04bb18bb1d8b742a02xxx', '2019-09-10 10:08:58', '2019-09-10 10:08:58'),
@@ -211,7 +268,7 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_name`, `menu_path`, `menu_parent_id`, `
 ('b9e5a8d943354e918b9b2e5d965ca0a6', '发红包', '/lucky/redPacket/create', 'bcf17dc0ce304f0ba02d64ce21ddb43d', '2020-08-04 12:29:44', '2020-08-04 12:29:44'),
 ('bcf17dc0ce304f0ba02d64ce21ddb43d', '红包管理', '/lucky', '', '2019-09-17 10:46:11', '2019-09-17 10:46:11'),
 ('bcf17dc0ce304f0ba02d64ce21ddb4f9', '系统设置', '/sys/sysSetting/setting', '35cb950cebb04bb18bb1d8b742a02xxx', '2019-09-17 10:46:11', '2019-09-17 10:46:11'),
-('f65e2aa5ade94ca9a9e2994c9fbf3c58', '资产设置', '/wallet/assets/setting', '35cb950cebb04bb18bb1d8b742a02xxx', '2020-08-05 06:25:07', '2020-08-05 06:25:07'),
+('f65e2aa5ade94ca9a9e2994c9fbf3c58', '资产设置', '/assets/info/setting', '35cb950cebb04bb18bb1d8b742a02xxx', '2020-08-05 06:25:07', '2020-08-05 06:25:07'),
 ('fe63a57226a84fc48dc303cd14f707b7', '收红包', '/lucky/redPacket/receive', 'bcf17dc0ce304f0ba02d64ce21ddb43d', '2020-08-04 13:03:00', '2020-08-04 13:03:00');
 
 -- --------------------------------------------------------
@@ -367,66 +424,22 @@ INSERT INTO `sys_user_menu` (`user_menu_id`, `user_id`, `menu_id`, `create_time`
 ('f506348e68ca4a6f8acaaec4e9aceb59', '2', '35cb950cebb04bb18bb1d8b742a02xzz', '2020-08-07 07:31:11', '2020-08-07 07:31:11'),
 ('f7f13fa9a18443a49bd32b4037a663ec', '1', 'b9e5a8d943354e918b9b2e5d965ca0a6', '2020-08-10 06:33:40', '2020-08-10 06:33:40');
 
--- --------------------------------------------------------
-
---
--- 表的结构 `wallet_account`
---
-
-CREATE TABLE `wallet_account` (
-  `id` varchar(255) NOT NULL,
-  `account_password` varchar(255) DEFAULT NULL,
-  `assets_id` varchar(255) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `receive_account` varchar(255) DEFAULT NULL,
-  `receive_address` varchar(255) DEFAULT NULL,
-  `receive_balance` decimal(19,2) DEFAULT NULL,
-  `send_account` varchar(255) DEFAULT NULL,
-  `send_address` varchar(255) DEFAULT NULL,
-  `send_balance` decimal(19,2) DEFAULT NULL,
-  `send_private_key` varchar(255) DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  `user_id` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `wallet_account`
---
-
-INSERT INTO `wallet_account` (`id`, `account_password`, `assets_id`, `create_time`, `receive_account`, `receive_address`, `receive_balance`, `send_account`, `send_address`, `send_balance`, `send_private_key`, `update_time`, `user_id`) VALUES
-('e4b182a580e8411f8ef9c52c09989c57', NULL, '16cd4f04344f4bbd95babeae768d23b4', '2020-08-08 10:15:51', '1_receive', 'Md5yVndUCMkG84okfR4VTDyA8DVTT2p9qx', '0.00', '1_send', 'MpxbMuBAspP3m1G2DyavKnsaiD46FPwYpz', '0.00', 'aU23KyZLQYPGTQ2Lc4fQG9z5JCxCV4kUZ98unzyStW1cT9JLwhji', '2020-08-08 10:17:39', '1');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `wallet_assets`
---
-
-CREATE TABLE `wallet_assets` (
-  `assets_id` varchar(255) NOT NULL,
-  `assets_enable` bit(1) DEFAULT NULL,
-  `assets_home` varchar(255) DEFAULT NULL,
-  `assets_introduction` varchar(255) DEFAULT NULL,
-  `assets_name` varchar(255) DEFAULT NULL,
-  `assets_name_zh` varchar(255) DEFAULT NULL,
-  `assets_symbol` varchar(255) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `last_block_height` varchar(255) DEFAULT NULL,
-  `last_block_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `wallet_assets`
---
-
-INSERT INTO `wallet_assets` (`assets_id`, `assets_enable`, `assets_home`, `assets_introduction`, `assets_name`, `assets_name_zh`, `assets_symbol`, `create_time`, `last_block_height`, `last_block_time`, `update_time`) VALUES
-('16cd4f04344f4bbd95babeae768d23b4', b'1', 'projectpai.com', '介绍PAI', 'Project PAI', '1派', 'PAI', '2020-08-05 08:29:03', '59829', '2020-08-10 04:22:52', '2020-08-10 06:36:27'),
-('e7d5705c15dc466d9578e347cdbd12bb', b'0', '', '', 'bitcoin', '比特币', 'BTC', '2020-08-05 08:29:58', '', '2020-08-05 08:29:52', '2020-08-05 08:30:18');
-
 --
 -- 转储表的索引
 --
+
+--
+-- 表的索引 `assets_account`
+--
+ALTER TABLE `assets_account`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK45oh97f6yiexj35gava2to8ha` (`assets_id`);
+
+--
+-- 表的索引 `assets_info`
+--
+ALTER TABLE `assets_info`
+  ADD PRIMARY KEY (`assets_id`);
 
 --
 -- 表的索引 `persistent_logins`
@@ -507,19 +520,6 @@ ALTER TABLE `sys_user_menu`
   ADD PRIMARY KEY (`user_menu_id`) USING BTREE,
   ADD KEY `FK6va8c3wvegutnirrjla5dqpnn` (`menu_id`),
   ADD KEY `FKfqsgyqt79xa4wybipbli5e0pn` (`user_id`);
-
---
--- 表的索引 `wallet_account`
---
-ALTER TABLE `wallet_account`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK45oh97f6yiexj35gava2to8ha` (`assets_id`);
-
---
--- 表的索引 `wallet_assets`
---
-ALTER TABLE `wallet_assets`
-  ADD PRIMARY KEY (`assets_id`);
 
 --
 -- 在导出的表使用AUTO_INCREMENT
