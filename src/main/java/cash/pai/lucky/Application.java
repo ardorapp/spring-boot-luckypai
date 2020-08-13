@@ -1,5 +1,6 @@
 package cash.pai.lucky;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +18,7 @@ import org.springframework.security.core.session.SessionRegistryImpl;
  */
 @EnableAsync
 @SpringBootApplication
+@MapperScan("cash.pai.lucky.dao")
 public class Application {
 	private final static Logger LOGGER = LoggerFactory.getLogger(Application.class);
 	/**

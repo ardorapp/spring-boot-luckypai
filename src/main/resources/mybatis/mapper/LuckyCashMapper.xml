@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cash.pai.lucky.dao.LuckyCashMapper">
+  <resultMap id="BaseResultMap" type="cash.pai.lucky.entity.LuckyCash">
+    <id column="luckycash_id" jdbcType="VARCHAR" property="luckycashId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="assets_id" jdbcType="VARCHAR" property="assetsId" />
+    <result column="amount_total" jdbcType="DECIMAL" property="amountTotal" />
+    <result column="amount_used" jdbcType="DECIMAL" property="amountUsed" />
+    <result column="amount_send" jdbcType="DECIMAL" property="amountSend" />
+    <result column="amount_available" jdbcType="DECIMAL" property="amountAvailable" />
+    <result column="amount_expiration" jdbcType="DECIMAL" property="amountExpiration" />
+    <result column="transaction_fee" jdbcType="DECIMAL" property="transactionFee" />
+    <result column="service_fee" jdbcType="DECIMAL" property="serviceFee" />
+    <result column="packet_total" jdbcType="INTEGER" property="packetTotal" />
+    <result column="packet_used" jdbcType="INTEGER" property="packetUsed" />
+    <result column="packet_send" jdbcType="INTEGER" property="packetSend" />
+    <result column="packet_available" jdbcType="INTEGER" property="packetAvailable" />
+    <result column="packet_expiration" jdbcType="INTEGER" property="packetExpiration" />
+    <result column="packet_type" jdbcType="INTEGER" property="packetType" />
+    <result column="spend_time" jdbcType="BIGINT" property="spendTime" />
+    <result column="expiration_time" jdbcType="TIMESTAMP" property="expirationTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="packet_title" jdbcType="VARCHAR" property="packetTitle" />
+    <result column="packet_content" jdbcType="VARCHAR" property="packetContent" />
+    <result column="packet_image" jdbcType="VARCHAR" property="packetImage" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    luckycash_id, user_id, assets_id, amount_total, amount_used, amount_send, amount_available, 
+    amount_expiration, transaction_fee, service_fee, packet_total, packet_used, packet_send, 
+    packet_available, packet_expiration, packet_type, spend_time, expiration_time, create_time, 
+    update_time, status, packet_title, packet_content, packet_image
+  </sql>
+  <select id="selectByExample" parameterType="cash.pai.lucky.entity.LuckyCashExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from assets_luckycash
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from assets_luckycash
+    where luckycash_id = #{luckycashId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from assets_luckycash
+    where luckycash_id = #{luckycashId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cash.pai.lucky.entity.LuckyCash">
+    insert into assets_luckycash (luckycash_id, user_id, assets_id, 
+      amount_total, amount_used, amount_send, 
+      amount_available, amount_expiration, transaction_fee, 
+      service_fee, packet_total, packet_used, 
+      packet_send, packet_available, packet_expiration, 
+      packet_type, spend_time, expiration_time, 
+      create_time, update_time, status, 
+      packet_title, packet_content, packet_image
+      )
+    values (#{luckycashId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{assetsId,jdbcType=VARCHAR}, 
+      #{amountTotal,jdbcType=DECIMAL}, #{amountUsed,jdbcType=DECIMAL}, #{amountSend,jdbcType=DECIMAL}, 
+      #{amountAvailable,jdbcType=DECIMAL}, #{amountExpiration,jdbcType=DECIMAL}, #{transactionFee,jdbcType=DECIMAL}, 
+      #{serviceFee,jdbcType=DECIMAL}, #{packetTotal,jdbcType=INTEGER}, #{packetUsed,jdbcType=INTEGER}, 
+      #{packetSend,jdbcType=INTEGER}, #{packetAvailable,jdbcType=INTEGER}, #{packetExpiration,jdbcType=INTEGER}, 
+      #{packetType,jdbcType=INTEGER}, #{spendTime,jdbcType=BIGINT}, #{expirationTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{packetTitle,jdbcType=VARCHAR}, #{packetContent,jdbcType=VARCHAR}, #{packetImage,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cash.pai.lucky.entity.LuckyCash">
+    insert into assets_luckycash
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="luckycashId != null">
+        luckycash_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="assetsId != null">
+        assets_id,
+      </if>
+      <if test="amountTotal != null">
+        amount_total,
+      </if>
+      <if test="amountUsed != null">
+        amount_used,
+      </if>
+      <if test="amountSend != null">
+        amount_send,
+      </if>
+      <if test="amountAvailable != null">
+        amount_available,
+      </if>
+      <if test="amountExpiration != null">
+        amount_expiration,
+      </if>
+      <if test="transactionFee != null">
+        transaction_fee,
+      </if>
+      <if test="serviceFee != null">
+        service_fee,
+      </if>
+      <if test="packetTotal != null">
+        packet_total,
+      </if>
+      <if test="packetUsed != null">
+        packet_used,
+      </if>
+      <if test="packetSend != null">
+        packet_send,
+      </if>
+      <if test="packetAvailable != null">
+        packet_available,
+      </if>
+      <if test="packetExpiration != null">
+        packet_expiration,
+      </if>
+      <if test="packetType != null">
+        packet_type,
+      </if>
+      <if test="spendTime != null">
+        spend_time,
+      </if>
+      <if test="expirationTime != null">
+        expiration_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="packetTitle != null">
+        packet_title,
+      </if>
+      <if test="packetContent != null">
+        packet_content,
+      </if>
+      <if test="packetImage != null">
+        packet_image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="luckycashId != null">
+        #{luckycashId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="assetsId != null">
+        #{assetsId,jdbcType=VARCHAR},
+      </if>
+      <if test="amountTotal != null">
+        #{amountTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="amountUsed != null">
+        #{amountUsed,jdbcType=DECIMAL},
+      </if>
+      <if test="amountSend != null">
+        #{amountSend,jdbcType=DECIMAL},
+      </if>
+      <if test="amountAvailable != null">
+        #{amountAvailable,jdbcType=DECIMAL},
+      </if>
+      <if test="amountExpiration != null">
+        #{amountExpiration,jdbcType=DECIMAL},
+      </if>
+      <if test="transactionFee != null">
+        #{transactionFee,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceFee != null">
+        #{serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="packetTotal != null">
+        #{packetTotal,jdbcType=INTEGER},
+      </if>
+      <if test="packetUsed != null">
+        #{packetUsed,jdbcType=INTEGER},
+      </if>
+      <if test="packetSend != null">
+        #{packetSend,jdbcType=INTEGER},
+      </if>
+      <if test="packetAvailable != null">
+        #{packetAvailable,jdbcType=INTEGER},
+      </if>
+      <if test="packetExpiration != null">
+        #{packetExpiration,jdbcType=INTEGER},
+      </if>
+      <if test="packetType != null">
+        #{packetType,jdbcType=INTEGER},
+      </if>
+      <if test="spendTime != null">
+        #{spendTime,jdbcType=BIGINT},
+      </if>
+      <if test="expirationTime != null">
+        #{expirationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="packetTitle != null">
+        #{packetTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="packetContent != null">
+        #{packetContent,jdbcType=VARCHAR},
+      </if>
+      <if test="packetImage != null">
+        #{packetImage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cash.pai.lucky.entity.LuckyCash">
+    update assets_luckycash
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="assetsId != null">
+        assets_id = #{assetsId,jdbcType=VARCHAR},
+      </if>
+      <if test="amountTotal != null">
+        amount_total = #{amountTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="amountUsed != null">
+        amount_used = #{amountUsed,jdbcType=DECIMAL},
+      </if>
+      <if test="amountSend != null">
+        amount_send = #{amountSend,jdbcType=DECIMAL},
+      </if>
+      <if test="amountAvailable != null">
+        amount_available = #{amountAvailable,jdbcType=DECIMAL},
+      </if>
+      <if test="amountExpiration != null">
+        amount_expiration = #{amountExpiration,jdbcType=DECIMAL},
+      </if>
+      <if test="transactionFee != null">
+        transaction_fee = #{transactionFee,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceFee != null">
+        service_fee = #{serviceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="packetTotal != null">
+        packet_total = #{packetTotal,jdbcType=INTEGER},
+      </if>
+      <if test="packetUsed != null">
+        packet_used = #{packetUsed,jdbcType=INTEGER},
+      </if>
+      <if test="packetSend != null">
+        packet_send = #{packetSend,jdbcType=INTEGER},
+      </if>
+      <if test="packetAvailable != null">
+        packet_available = #{packetAvailable,jdbcType=INTEGER},
+      </if>
+      <if test="packetExpiration != null">
+        packet_expiration = #{packetExpiration,jdbcType=INTEGER},
+      </if>
+      <if test="packetType != null">
+        packet_type = #{packetType,jdbcType=INTEGER},
+      </if>
+      <if test="spendTime != null">
+        spend_time = #{spendTime,jdbcType=BIGINT},
+      </if>
+      <if test="expirationTime != null">
+        expiration_time = #{expirationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="packetTitle != null">
+        packet_title = #{packetTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="packetContent != null">
+        packet_content = #{packetContent,jdbcType=VARCHAR},
+      </if>
+      <if test="packetImage != null">
+        packet_image = #{packetImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where luckycash_id = #{luckycashId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cash.pai.lucky.entity.LuckyCash">
+    update assets_luckycash
+    set user_id = #{userId,jdbcType=VARCHAR},
+      assets_id = #{assetsId,jdbcType=VARCHAR},
+      amount_total = #{amountTotal,jdbcType=DECIMAL},
+      amount_used = #{amountUsed,jdbcType=DECIMAL},
+      amount_send = #{amountSend,jdbcType=DECIMAL},
+      amount_available = #{amountAvailable,jdbcType=DECIMAL},
+      amount_expiration = #{amountExpiration,jdbcType=DECIMAL},
+      transaction_fee = #{transactionFee,jdbcType=DECIMAL},
+      service_fee = #{serviceFee,jdbcType=DECIMAL},
+      packet_total = #{packetTotal,jdbcType=INTEGER},
+      packet_used = #{packetUsed,jdbcType=INTEGER},
+      packet_send = #{packetSend,jdbcType=INTEGER},
+      packet_available = #{packetAvailable,jdbcType=INTEGER},
+      packet_expiration = #{packetExpiration,jdbcType=INTEGER},
+      packet_type = #{packetType,jdbcType=INTEGER},
+      spend_time = #{spendTime,jdbcType=BIGINT},
+      expiration_time = #{expirationTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      packet_title = #{packetTitle,jdbcType=VARCHAR},
+      packet_content = #{packetContent,jdbcType=VARCHAR},
+      packet_image = #{packetImage,jdbcType=VARCHAR}
+    where luckycash_id = #{luckycashId,jdbcType=VARCHAR}
+  </update>
+</mapper>

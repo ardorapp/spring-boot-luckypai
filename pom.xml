@@ -265,6 +265,26 @@
                   <target>1.8</target>
               </configuration>
            </plugin>
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>1.4.0</version>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>8.0.21</version>
+					</dependency>
+					<dependency>
+						<groupId>cash.pai.generator</groupId>
+						<artifactId>mybatis-generator-maven-plugin</artifactId>
+						<version>0.0.1-SNAPSHOT</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<overwrite>true</overwrite>
+				</configuration>
+			</plugin>
 	  </plugins>
   </build>
 </project>

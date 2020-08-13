@@ -62,7 +62,7 @@ public class AssetsInfoServiceImpl extends CommonServiceImpl<AssetsInfoVo, Asset
     protected void syncAssetsInfoTasks() {
         super.list(null).getData().forEach((assetsVo)->{
             updateAssetsServiceInfo(assetsVo,assetsServiceHub.getAssetsServiceFactory(assetsVo.getAssetsSymbol()));
-            updateAssetsAccountBalance(assetsVo,assetsServiceHub.getAssetsServiceFactory(assetsVo.getAssetsSymbol()));
+//            updateAssetsAccountBalance(assetsVo,assetsServiceHub.getAssetsServiceFactory(assetsVo.getAssetsSymbol()));
         });
     }
 
@@ -91,27 +91,23 @@ public class AssetsInfoServiceImpl extends CommonServiceImpl<AssetsInfoVo, Asset
         for (Object allPrincipal : allPrincipals) {
             User user = (User) allPrincipal;
             SysUserVo sysUserVo = sysUserService.findByLoginName(user.getUsername()).getData();
-            List<AssetsAccount> list = assetsAccountRepository.findByUserIdAndAssetsId(sysUserVo.getUserId(),assetsVo.getAssetsId());
-            if (list == null || list.size() == 0) {
+            AssetsAccount assetsAccount = assetsAccountRepository.findByUserIdAndAssetsId(sysUserVo.getUserId(),assetsVo.getAssetsId());
+            if (assetsAccount == null) {
                 return;
             }
-            list.forEach((account)->{
-                if (!StringUtils.isEmpty(account.getSendAccount())) {
-                    BigDecimal bigDecimal = assetsServiceFactory.getBalance(account.getSendAccount());
-                    account.setSendBalance(bigDecimal);
+                if (!StringUtils.isEmpty(assetsAccount.getSendAccount())) {
+                    BigDecimal bigDecimal = assetsServiceFactory.getBalance(assetsAccount.getSendAccount());
+                    assetsAccount.setSendBalance(bigDecimal);
                 }
 
-                if (!StringUtils.isEmpty(account.getReceiveAccount())) {
-                    BigDecimal bigDecimal = assetsServiceFactory.getBalance(account.getReceiveAccount());
-                    account.setReceiveBalance(bigDecimal);
+                if (!StringUtils.isEmpty(assetsAccount.getReceiveAccount())) {
+                    BigDecimal bigDecimal = assetsServiceFactory.getBalance(assetsAccount.getReceiveAccount());
+                    assetsAccount.setReceiveBalance(bigDecimal);
                 }
                 //更新该资产下的账户余额。
-                assetsAccountRepository.save(account);
-                log.info("updateAssetsAccountBalance " +account);
-            });
+                assetsAccountRepository.save(assetsAccount);
+                log.info("updateAssetsAccountBalance " +assetsAccount);
         }
-
-
     }
 
 
@@ -120,6 +116,4 @@ public class AssetsInfoServiceImpl extends CommonServiceImpl<AssetsInfoVo, Asset
     public Result<List<AssetsInfoVo>> findByAssetsEnable(Boolean assetsEnable) {
         return Result.of(CopyUtil.copyList(assetsInfoRepository.findByAssetsEnable(assetsEnable), AssetsInfoVo.class));
     }
-
-
 }
