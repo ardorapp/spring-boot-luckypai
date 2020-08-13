@@ -6,7 +6,7 @@ import cash.pai.lucky.entity.UserEntity;
 import cash.pai.lucky.param.RegisterParam;
 
 
-public interface PaiAuthorityService {
+public interface RedPackageAuthorityService {
       AuthorityEntity findById(String id);
       Result insert(AuthorityEntity registerParam)  ;
 }

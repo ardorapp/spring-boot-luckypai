@@ -7,7 +7,7 @@ import cash.pai.lucky.dao.UserDao;
 import cash.pai.lucky.entity.UserAuthorityEntity;
 import cash.pai.lucky.entity.UserEntity;
 import cash.pai.lucky.param.RegisterParam;
-import cash.pai.lucky.service.PaiUserService;
+import cash.pai.lucky.service.RedPackageUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class PaiUserServiceImpl implements PaiUserService {
+public class RedPackageUserServiceImpl implements RedPackageUserService {
 
     @Autowired
     UserDao userDao;
