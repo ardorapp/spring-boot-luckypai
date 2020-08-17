@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -16,17 +17,12 @@ import org.springframework.stereotype.Component;
  * 创建时间	2018年4月8日
  */
 @Component
+@Slf4j
 public class RedisUtil {
-	
-   private static final Logger logger = LoggerFactory.getLogger(RedisUtil.class);
 	
     @Resource
 	private RedisTemplate<Serializable, Serializable> redisTemplate;
 	
-	/**
-     * 前缀
-     */
-    public static final String KEY_PREFIX_VALUE = "itstyle:seckill:value:";
 
 	
 	/**
@@ -37,45 +33,41 @@ public class RedisUtil {
      * @return
      */
     public  boolean cacheValue(String k, Serializable v, long time) {
-        String key = KEY_PREFIX_VALUE + k;
+        String key =  k;
         try {
             ValueOperations<Serializable, Serializable> valueOps =  redisTemplate.opsForValue();
             valueOps.set(key, v);
             if (time > 0) redisTemplate.expire(key, time, TimeUnit.SECONDS);
             return true;
         } catch (Throwable t) {
-            logger.error("缓存[{}]失败, value[{}]",key,v,t);
+            log.error("缓存[{}]失败, value[{}]",key,v,t);
         }
         return false;
     }
     /**
-     * 缓存value操作
-     * @Author  科帮网
+     * 缓存value操作,有过期时间
      * @param k
      * @param v
      * @param time
      * @param unit
      * @return  boolean
-     * @Date	2017年12月23日
-     * 更新日志
-     * 2017年12月23日  科帮网  首次创建
      *
      */
     public  boolean cacheValue(String k, Serializable v, long time,TimeUnit unit) {
-        String key = KEY_PREFIX_VALUE + k;
+        String key =  k;
         try {
             ValueOperations<Serializable, Serializable> valueOps =  redisTemplate.opsForValue();
             valueOps.set(key, v);
             if (time > 0) redisTemplate.expire(key, time, unit);
             return true;
         } catch (Throwable t) {
-            logger.error("缓存[{}]失败, value[{}]",key,v,t);
+            log.error("缓存[{}]失败, value[{}]",key,v,t);
         }
         return false;
     }
 
     /**
-     * 缓存value操作
+     * 缓存value ,永不过期
      * @param k
      * @param v
      * @return
@@ -90,11 +82,11 @@ public class RedisUtil {
      * @return
      */
     public  boolean containsValueKey(String k) {
-        String key = KEY_PREFIX_VALUE + k;
+        String key =  k;
         try {
             return redisTemplate.hasKey(key);
         } catch (Throwable t) {
-            logger.error("判断缓存存在失败key[" + key + ", error[" + t + "]");
+            log.error("判断缓存存在失败key[" + key + ", error[" + t + "]");
         }
         return false;
     }
@@ -106,9 +98,9 @@ public class RedisUtil {
     public  Serializable getValue(String k) {
         try {
             ValueOperations<Serializable, Serializable> valueOps =  redisTemplate.opsForValue();
-            return valueOps.get(KEY_PREFIX_VALUE + k);
+            return valueOps.get( k);
         } catch (Throwable t) {
-            logger.error("获取缓存失败key[" + KEY_PREFIX_VALUE + k + ", error[" + t + "]");
+            log.error("获取缓存失败key[" +  k + ", error[" + t + "]");
         }
         return null;
     }
@@ -118,12 +110,12 @@ public class RedisUtil {
      * @return
      */
     public  boolean removeValue(String k) {
-    	String key = KEY_PREFIX_VALUE + k;
+    	String key =  k;
     	try {
             redisTemplate.delete(key);
             return true;
         } catch (Throwable t) {
-            logger.error("获取缓存失败key[" + key + ", error[" + t + "]");
+            log.error("获取缓存失败key[" + key + ", error[" + t + "]");
         }
         return false;
     }
@@ -134,7 +126,7 @@ public class RedisUtil {
      * @return
      */
     public long incr(String k, long delta) {
-        String key = KEY_PREFIX_VALUE + k;
+        String key =  k;
         if (delta < 0) {
             throw new RuntimeException("递增因子必须大于0");
         }
@@ -148,7 +140,7 @@ public class RedisUtil {
      * @return
      */
     public long decr(String k, long delta) {
-        String key = KEY_PREFIX_VALUE + k;
+        String key =  k;
         if (delta < 0) {
             throw new RuntimeException("递减因子必须大于0");
         }

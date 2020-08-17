@@ -1,3 +1,4 @@
+/*
 package cash.pai.lucky.admin.config.security;
 
 import org.springframework.stereotype.Component;
@@ -10,9 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 
+*/
 /**
  * 自定义errorPage拦截器
- */
+ *//*
+
 @Component
 public class ErrorPageFilterConfig implements Filter {
     @Override
@@ -27,9 +30,11 @@ public class ErrorPageFilterConfig implements Filter {
     }
 }
 
+*/
 /**
  * 错误页面跳转
- */
+ *//*
+
 @Controller
 class ErrorPageController {
     @GetMapping("/error/403")
@@ -47,3 +52,4 @@ class ErrorPageController {
         return new ModelAndView("common/error/500");
     }
 }
+*/

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class RedPackageUserAuthorityServiceImpl implements RedPackageUserAuthorityService {
+public class UserAssetAuthorityServiceImpl implements RedPackageUserAuthorityService {
 
     @Autowired
     UserAuthorityDao userAuthorityDao;

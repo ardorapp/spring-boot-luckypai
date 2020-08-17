@@ -60,4 +60,10 @@
 		values
 		(   #{userId}, #{loginName},#{lastChangePwdTime}, #{limitMultiLogin},   #{userName},#{password},#{valid},#{createTime},#{updateTime},#{phone},#{email},#{sex},#{realName},#{idCard})
 	</insert>
+    
+    <update id="activeUser">
+        UPDATE sys_user SET valid ='Y' , update_time=NOW()
+        WHERE  user_name= #{userName} and  valid='N'
+    </update>
+    
 </mapper>

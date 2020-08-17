@@ -9,10 +9,11 @@ import java.util.List;
 
 @Mapper
 public interface UserDao {
-	 Integer insert(UserEntity userEntity);
+    Integer insert(UserEntity userEntity);
 
-	UserEntity findById(@Param("userId") String userId);
+    UserEntity findById(@Param("userId") String userId);
 
+    List findByCondition(UserEntity userEntity);
 
-	List findByCondition(UserEntity userEntity)  ;
+    Integer activeUser(String userName);
 }

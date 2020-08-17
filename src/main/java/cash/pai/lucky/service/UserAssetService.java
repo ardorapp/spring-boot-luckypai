@@ -5,7 +5,9 @@ import cash.pai.lucky.entity.UserEntity;
 import cash.pai.lucky.param.RegisterParam;
 
 
-public interface RedPackageUserService {
+public interface UserAssetService {
       UserEntity findById(String id);
-      Result register(RegisterParam registerParam)  ;
+      Result register(RegisterParam registerParam) throws Exception;
+      Result checkCode(String code);
+
 }

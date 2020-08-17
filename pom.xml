@@ -239,6 +239,13 @@
 		  <artifactId>paicoin-rpc-client</artifactId>
 		  <version>0.0.1-SNAPSHOT</version>
 	  </dependency>
+
+	  <!--邮件-->
+	  <dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-mail</artifactId>
+	  </dependency>
+
   </dependencies>
   <build>
         <finalName>spring-boot-luckypai</finalName>

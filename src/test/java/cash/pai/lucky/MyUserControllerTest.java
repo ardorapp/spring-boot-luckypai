@@ -65,11 +65,31 @@ public class MyUserControllerTest {
      * 获取最新app信息
      */
     @Test
+    public void register() throws Exception {
+        RequestBuilder request = null;
+        //构造请求
+        UserParam userParam=new UserParam();
+        String requestJson = JSONObject.toJSONString(userParam);
+
+        request = post("/front/user/register")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestJson.getBytes()) ;
+        //执行请求
+        mockMvc.perform(request)
+                .andExpect(status().isOk())//返回HTTP状态为200
+                .andDo(print());//打印结果
+        //.andReturn();//想要返回结果，使用此方法
+
+    }
+
+    /**
+     * 获取最新app信息
+     */
+  /*  @Test
     public void find() throws Exception {
         RequestBuilder request = null;
         //构造请求
-
-
         UserParam userParam=new UserParam();
         userParam.setUserId("1");
         String requestJson = JSONObject.toJSONString(userParam);
@@ -85,5 +105,8 @@ public class MyUserControllerTest {
                 .andDo(print());//打印结果
         //.andReturn();//想要返回结果，使用此方法
 
-    }
+    }*/
+
+
+
 }
