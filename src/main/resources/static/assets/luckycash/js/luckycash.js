@@ -8,8 +8,8 @@ layui.use(['element', 'form', 'table', 'layer', 'laydate', 'util'], function () 
 
     //资产列表
     tableIns = table.render({
-        elem: '#assetsTable'
-        , url: ctx + '/assets/info/page'
+        elem: '#luckycashTable'
+        , url: ctx + '/assets/luckycash/page'
         , method: 'POST'
         //请求前参数处理
         , request: {
@@ -26,6 +26,8 @@ layui.use(['element', 'form', 'table', 'layer', 'laydate', 'util'], function () 
         //响应后数据处理
         , parseData: function (res) { //res 即为原始返回的数据
             var data = res.data;
+            console.log("=====================");
+            console.log(data);
             return {
                 "flag": res.flag, //解析接口状态
                 "msg": res.msg, //解析提示文本
@@ -33,29 +35,16 @@ layui.use(['element', 'form', 'table', 'layer', 'laydate', 'util'], function () 
                 "rows": data.rows //解析数据列表
             };
         }
-        , toolbar: '#assetsTableToolbarDemo'
-        , title: '资产列表'
+        , toolbar: '#luckycashTableToolbarDemo'
+        , title: '我创建的红包列表'
         , cols: [[
-            {field: 'assetsId', title: 'ID', hide: true}
-            , {field: 'assetsSymbol', title: '资产符号'}
-            , {field: 'assetsName', title: '资产名称'}
-            , {field: 'assetsNameZh', title: '中文名称'}
-            , {field: 'assetsIntroduction', title: '资产介绍', hide: true}
-            , {field: 'assetsHome', title: '资产官网', hide: true}
-            , {field: 'assetsEnable', title: '是否可用', hide: true}
-            , {field: 'packetMax', title: '允许一个红包最大包数量', hide: true}
-            , {field: 'packetMin', title: '允许一个红包最小包数量', hide: true}
-            , {field: 'amountTotalMax', title: '允许一个红包最大金额', hide: true}
-            , {field: 'amountTotalMin', title: '允许一个红包最小金额', hide: true}
-            , {field: 'transactionFee', title: '一次转账的费用', hide: true}
-            , {field: 'serviceFeeMin', title: '发每个红包的最低服务费用', hide: true}
-            , {field: 'serviceFeeRate', title: '发每个红包的服务费比例', hide: true}
-            , {field: 'serviceFeeAddress', title: '服务费收款地址', hide: true}
-            , {field: 'lastBlockHeight', title: '最新区块高度', hide: true}
-            , {field: 'lastBlockTime', title: '最新区块时间', hide: true}
-            , {field: 'createTime', title: '创建时间', hide: true}
-            , {field: 'updateTime', title: '更新时间', hide: true}
-            , {fixed: 'right', title: '操作', toolbar: '#assetsTableBarDemo'}
+            {field: 'luckycashId', title: '红包ID'}
+            , {field: 'assetsId', title: '资产'}
+            , {field: 'amountTotal', title: '总金额'}
+            , {field: 'packetTitle', title: '标题'}
+            , {field: 'status', title: '状态'}
+            , {field: 'packetContent', title: '内容', hide: true}
+            , {fixed: 'right', title: '操作', toolbar: '#luckycashTableBarDemo'}
         ]]
         , defaultToolbar: ['', '', '']
         , page: true
@@ -68,7 +57,7 @@ layui.use(['element', 'form', 'table', 'layer', 'laydate', 'util'], function () 
         switch (obj.event) {
             case 'addData':
                 //重置操作表单
-                $("#assetsForm")[0].reset();
+                $("#luckycashForm")[0].reset();
                 let nowTime = commonUtil.getNowTime();
                 $("input[name='createTime']").val(nowTime);
                 $("input[name='updateTime']").val(nowTime);
@@ -85,7 +74,7 @@ layui.use(['element', 'form', 'table', 'layer', 'laydate', 'util'], function () 
         if (obj.event === 'del') {
             layer.confirm('确认删除吗？', function (index) {
                 //向服务端发送删除指令
-                $.delete(ctx + "/assets/info/delete/" + data.assetsId, {}, function (data) {
+                $.delete(ctx + "/assets/luckycash/delete/" + data.luckycashId, {}, function (data) {
                     tableIns.reload();
                     layer.close(index);
                 })
@@ -94,7 +83,7 @@ layui.use(['element', 'form', 'table', 'layer', 'laydate', 'util'], function () 
         //编辑
         else if (obj.event === 'edit') {
             //回显操作表单
-            $("#assetsForm").form(data);
+            $("#luckycashForm").form(data);
             form.render();
         }
     });
@@ -109,13 +98,13 @@ layui.use(['element', 'form', 'table', 'layer', 'laydate', 'util'], function () 
 /**
  * 提交保存
  */
-function assetsFormSave() {
-    let assetsForm = $("#assetsForm").serializeObject();
-    assetsForm.updateTime = commonUtil.getNowTime();
-    $.post(ctx + "/assets/info/save", assetsForm, function (data) {
+function luckycashFormSave() {
+    let luckycashForm = $("#luckycashForm").serializeObject();
+    luckycashForm.updateTime = commonUtil.getNowTime();
+    $.post(ctx + "/assets/luckycash/save", luckycashForm, function (data) {
         layer.msg("保存成功", {icon: 1, time: 2000}, function () {});
         //更新table、updateTime
-        $("input[name='updateTime']").val(assetsForm.updateTime);
+        $("input[name='updateTime']").val(luckycashForm.updateTime);
         tableIns.reload();
     });
 }

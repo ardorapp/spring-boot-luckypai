@@ -10,5 +10,5 @@ import java.util.List;
 public interface AssetsAccountRepository extends CommonRepository<AssetsAccount, String> {
     List<AssetsAccount> findByUserId(String userId);
 
-    List<AssetsAccount> findByUserIdAndAssetsId(String userId, String assetsId);
+    AssetsAccount findByUserIdAndAssetsId(String userId, String assetsId);
 }

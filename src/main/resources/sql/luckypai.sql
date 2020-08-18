@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 172.20.0.11:3306
--- 生成日期： 2020-08-10 11:43:42
+-- 生成日期： 2020-08-13 12:16:12
 -- 服务器版本： 8.0.21
 -- PHP 版本： 7.4.5
 
@@ -48,7 +48,7 @@ CREATE TABLE `assets_account` (
 --
 
 INSERT INTO `assets_account` (`id`, `account_password`, `assets_id`, `create_time`, `receive_account`, `receive_address`, `receive_balance`, `send_account`, `send_address`, `send_balance`, `send_private_key`, `update_time`, `user_id`) VALUES
-('e4b182a580e8411f8ef9c52c09989c57', NULL, '16cd4f04344f4bbd95babeae768d23b4', '2020-08-08 10:15:51', '1_receive', 'Md5yVndUCMkG84okfR4VTDyA8DVTT2p9qx', '0.00', '1_send', 'MpxbMuBAspP3m1G2DyavKnsaiD46FPwYpz', '0.00', 'aU23KyZLQYPGTQ2Lc4fQG9z5JCxCV4kUZ98unzyStW1cT9JLwhji', '2020-08-10 11:36:06', '1');
+('e4b182a580e8411f8ef9c52c09989c57', NULL, '16cd4f04344f4bbd95babeae768d23b4', '2020-08-08 10:15:51', '1_receive', 'Md5yVndUCMkG84okfR4VTDyA8DVTT2p9qx', '0.00', '1_send', 'MpxbMuBAspP3m1G2DyavKnsaiD46FPwYpz', '1000.00', 'aU23KyZLQYPGTQ2Lc4fQG9z5JCxCV4kUZ98unzyStW1cT9JLwhji', '2020-08-10 11:36:06', '1');
 
 -- --------------------------------------------------------
 
@@ -58,25 +58,75 @@ INSERT INTO `assets_account` (`id`, `account_password`, `assets_id`, `create_tim
 
 CREATE TABLE `assets_info` (
   `assets_id` varchar(255) NOT NULL,
-  `assets_enable` bit(1) DEFAULT NULL,
   `assets_home` varchar(255) DEFAULT NULL,
   `assets_introduction` varchar(255) DEFAULT NULL,
   `assets_name` varchar(255) DEFAULT NULL,
   `assets_name_zh` varchar(255) DEFAULT NULL,
   `assets_symbol` varchar(255) DEFAULT NULL,
+  `assets_enable` tinyint(1) NOT NULL,
   `create_time` datetime DEFAULT NULL,
   `last_block_height` varchar(255) DEFAULT NULL,
   `last_block_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL
+  `update_time` datetime DEFAULT NULL,
+  `packet_max` int DEFAULT NULL COMMENT '允许一个红包最大包数量',
+  `packet_min` int DEFAULT NULL COMMENT '允许一个红包最小包数量',
+  `amount_total_max` decimal(19,2) DEFAULT NULL COMMENT '允许一个红包最大金额',
+  `amount_total_min` decimal(19,2) DEFAULT NULL COMMENT '允许一个红包最小金额',
+  `transaction_fee` decimal(19,2) DEFAULT NULL COMMENT '一次转账的费用',
+  `service_fee_min` decimal(19,2) DEFAULT NULL COMMENT '发每个红包的最低服务费用',
+  `service_fee_rate` float DEFAULT NULL COMMENT '发每个红包的服务费比例，先按照费率计算服务费，若费率低于最低费用则按照最低服务费收费。',
+  `service_fee_address` varchar(255) DEFAULT NULL COMMENT '服务费收款地址'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `assets_info`
 --
 
-INSERT INTO `assets_info` (`assets_id`, `assets_enable`, `assets_home`, `assets_introduction`, `assets_name`, `assets_name_zh`, `assets_symbol`, `create_time`, `last_block_height`, `last_block_time`, `update_time`) VALUES
-('16cd4f04344f4bbd95babeae768d23b4', b'1', 'projectpai.com', '介绍PAI', 'Project PAI', '派d', 'PAI', '2020-08-05 08:29:03', '59843', '2020-08-10 09:20:23', '2020-08-10 11:43:29'),
-('e7d5705c15dc466d9578e347cdbd12bb', b'0', '', '', 'bitcoin', '比特币', 'BTC', '2020-08-05 08:29:58', '', '2020-08-05 08:29:52', '2020-08-05 08:30:18');
+INSERT INTO `assets_info` (`assets_id`, `assets_home`, `assets_introduction`, `assets_name`, `assets_name_zh`, `assets_symbol`, `assets_enable`, `create_time`, `last_block_height`, `last_block_time`, `update_time`, `packet_max`, `packet_min`, `amount_total_max`, `amount_total_min`, `transaction_fee`, `service_fee_min`, `service_fee_rate`, `service_fee_address`) VALUES
+('16cd4f04344f4bbd95babeae768d23b4', 'projectpai.com', '介绍PAI', 'Project PAI', '派d', 'PAI', 1, '2020-08-05 08:29:03', '59942', '2020-08-13 09:49:22', '2020-08-13 12:16:12', 500, 2, '100.00', '10.00', '0.00', '0.01', 0.0001, 'safsf'),
+('e7d5705c15dc466d9578e347cdbd12bb', '', '', 'bitcoin', '比特币', 'BTC', 0, '2020-08-05 08:29:58', '', '2020-08-05 08:29:52', '2020-08-05 08:30:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `assets_luckycash`
+--
+
+CREATE TABLE `assets_luckycash` (
+  `luckycash_id` varchar(255) NOT NULL,
+  `user_id` varchar(255) DEFAULT NULL,
+  `assets_id` varchar(255) DEFAULT NULL,
+  `amount_total` decimal(19,2) DEFAULT '0.00',
+  `amount_used` decimal(19,2) DEFAULT '0.00',
+  `amount_send` decimal(19,2) DEFAULT '0.00',
+  `amount_available` decimal(19,2) DEFAULT '0.00',
+  `amount_expiration` decimal(19,2) DEFAULT '0.00',
+  `transaction_fee` decimal(19,2) DEFAULT '0.00',
+  `service_fee` decimal(19,2) DEFAULT '0.00',
+  `packet_total` int DEFAULT '0',
+  `packet_used` int DEFAULT '0',
+  `packet_send` int DEFAULT '0',
+  `packet_available` int DEFAULT '0',
+  `packet_expiration` int DEFAULT '0',
+  `packet_type` int DEFAULT '0',
+  `spend_time` bigint DEFAULT '0',
+  `expiration_time` datetime DEFAULT NULL,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `status` int DEFAULT '0' COMMENT '红包状态:0初始化；1:已激活正在抢红包中;2:已结束',
+  `packet_title` varchar(255) DEFAULT NULL COMMENT '标题',
+  `packet_content` varchar(255) DEFAULT NULL COMMENT '内容',
+  `packet_image` varchar(255) DEFAULT NULL COMMENT '图片'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `assets_luckycash`
+--
+
+INSERT INTO `assets_luckycash` (`luckycash_id`, `user_id`, `assets_id`, `amount_total`, `amount_used`, `amount_send`, `amount_available`, `amount_expiration`, `transaction_fee`, `service_fee`, `packet_total`, `packet_used`, `packet_send`, `packet_available`, `packet_expiration`, `packet_type`, `spend_time`, `expiration_time`, `create_time`, `update_time`, `status`, `packet_title`, `packet_content`, `packet_image`) VALUES
+('07cb7d2cd7f042caad568747d2112ba5', '1', '16cd4f04344f4bbd95babeae768d23b4', '22.00', NULL, NULL, NULL, NULL, NULL, NULL, 10, 0, 0, 0, 0, 0, 0, NULL, '2020-08-12 06:24:45', '2020-08-12 06:24:45', NULL, NULL, NULL, NULL),
+('33dbe41099fd48a39e7df273d323130f', '1', '16cd4f04344f4bbd95babeae768d23b4', '22.00', '0.00', '0.00', '21.00', '0.00', '0.00', '1.00', 10, 0, 0, 10, 0, 0, 0, NULL, '2020-08-12 06:59:17', '2020-08-12 06:59:17', 0, NULL, NULL, NULL),
+('703c912db25f48e19cf9dfb42517c264', '1', '16cd4f04344f4bbd95babeae768d23b4', '22.00', '0.00', '0.00', '21.99', '0.00', '0.00', '0.01', 10, 0, 0, 10, 0, 0, 0, NULL, '2020-08-12 11:22:39', '2020-08-12 11:22:39', 1, 'dd', 'aa', 'ff');
 
 -- --------------------------------------------------------
 
@@ -117,7 +167,7 @@ CREATE TABLE `persistent_logins` (
 --
 
 INSERT INTO `persistent_logins` (`series`, `username`, `token`) VALUES
-('Y86NCwjQdxObqwTfqp71Gw==', 'sa', 'FMH7iIzToCG8To4D2rosiw==');
+('4CFOx0kgM84qVWnTMJOBkg==', 'sa', 'vl0bzegAhSorDxOeHUr2Hg==');
 
 -- --------------------------------------------------------
 
@@ -234,7 +284,7 @@ CREATE TABLE `sys_authority` (
 
 INSERT INTO `sys_authority` (`authority_id`, `authority_name`, `authority_remark`, `create_time`, `update_time`, `authority_content`) VALUES
 ('3fb1c570496d4c09ab99b8d31b06ccc', 'ROLE_USER', '普通用户', '2019-09-10 10:08:58', '2019-09-10 10:08:58', ''),
-('3fb1c570496d4c09ab99b8d31b06xxx', 'ROLE_SA', '超级管理员', '2019-09-10 10:08:58', '2019-09-10 10:08:58', '/sys/**,/logging,/lucky/**'),
+('3fb1c570496d4c09ab99b8d31b06xxx', 'ROLE_SA', '超级管理员', '2019-09-10 10:08:58', '2019-09-10 10:08:58', '/sys/**,/logging,/assets/**'),
 ('3fb1c570496d4c09ab99b8d31b06zzz', 'ROLE_ADMIN', '管理员', '2019-09-10 10:08:58', '2019-09-10 10:08:58', '/sys/**');
 
 -- --------------------------------------------------------
@@ -265,11 +315,11 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_name`, `menu_path`, `menu_parent_id`, `
 ('35cb950cebb04bb18bb1d8b742a02xzz', '用户管理', '/sys/sysUser/user', '35cb950cebb04bb18bb1d8b742a02xxx', '2019-09-10 10:08:58', '2019-09-10 10:08:58'),
 ('74315e162f524a4d88aa931f02416f26', '实时监控', '/monitor', '35cb950cebb04bb18bb1d8b742a02xxx', '2020-06-10 15:07:07', '2020-06-10 15:07:07'),
 ('914aa22c78af4327822061f3eada4067', '实时日志', '/logging', '35cb950cebb04bb18bb1d8b742a02xxx', '2019-09-11 11:19:52', '2019-09-11 11:19:52'),
-('b9e5a8d943354e918b9b2e5d965ca0a6', '发红包', '/lucky/redPacket/create', 'bcf17dc0ce304f0ba02d64ce21ddb43d', '2020-08-04 12:29:44', '2020-08-04 12:29:44'),
+('b9e5a8d943354e918b9b2e5d965ca0a6', '创建红包', '/assets/luckycash/setting', 'bcf17dc0ce304f0ba02d64ce21ddb43d', '2020-08-04 12:29:44', '2020-08-04 12:29:44'),
 ('bcf17dc0ce304f0ba02d64ce21ddb43d', '红包管理', '/lucky', '', '2019-09-17 10:46:11', '2019-09-17 10:46:11'),
 ('bcf17dc0ce304f0ba02d64ce21ddb4f9', '系统设置', '/sys/sysSetting/setting', '35cb950cebb04bb18bb1d8b742a02xxx', '2019-09-17 10:46:11', '2019-09-17 10:46:11'),
 ('f65e2aa5ade94ca9a9e2994c9fbf3c58', '资产设置', '/assets/info/setting', '35cb950cebb04bb18bb1d8b742a02xxx', '2020-08-05 06:25:07', '2020-08-05 06:25:07'),
-('fe63a57226a84fc48dc303cd14f707b7', '收红包', '/lucky/redPacket/receive', 'bcf17dc0ce304f0ba02d64ce21ddb43d', '2020-08-04 13:03:00', '2020-08-04 13:03:00');
+('fe63a57226a84fc48dc303cd14f707b7', '已收红包', '/lucky/redPacket/receive', 'bcf17dc0ce304f0ba02d64ce21ddb43d', '2020-08-04 13:03:00', '2020-08-04 13:03:00');
 
 -- --------------------------------------------------------
 
@@ -440,6 +490,12 @@ ALTER TABLE `assets_account`
 --
 ALTER TABLE `assets_info`
   ADD PRIMARY KEY (`assets_id`);
+
+--
+-- 表的索引 `assets_luckycash`
+--
+ALTER TABLE `assets_luckycash`
+  ADD PRIMARY KEY (`luckycash_id`);
 
 --
 -- 表的索引 `persistent_logins`

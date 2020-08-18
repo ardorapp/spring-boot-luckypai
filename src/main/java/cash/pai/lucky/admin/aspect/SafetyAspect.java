@@ -41,6 +41,7 @@ public class SafetyAspect {
      */
     @Pointcut(value = "execution(public * cash.pai.lucky.admin.sys.*.controller.*.*(..)) || " +
             "execution(public * cash.pai.lucky.assets.*.controller.*.*(..)) || " +
+            "execution(public * cash.pai.lucky.web.*.*(..)) || " +
             "execution(public * cash.pai.lucky.admin.*.controller.*.*(..))")
     public void safetyAspect() {}
 

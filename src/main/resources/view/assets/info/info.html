@@ -71,15 +71,83 @@
                                    class="layui-input">
                         </div>
                     </div>
+<!--                    <div class="layui-form-item">-->
+<!--                        <label class="layui-form-label">是否激活</label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input type="radio" name="assetsEnable"-->
+<!--                                   th:attr="checked=${assets.assetsEnable ? true : false}" value="1" title="是"-->
+<!--                                   >-->
+<!--                            <input type="radio" name="assetsEnable"-->
+<!--                                   th:attr="checked=${assets.assetsEnable ? false : true}" value="0" title="否"-->
+<!--                                   >-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div class="layui-form-item">
-                        <label class="layui-form-label">最新区块高度</label>
+                        <label class="layui-form-label">最大数量</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="packetMax" autocomplete="off" placeholder="允许一个红包最大包数量"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">最小数量</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="packetMin" autocomplete="off" placeholder="允许一个红包最小包数量"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">最大金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="amountTotalMax" autocomplete="off" placeholder="允许一个红包最大金额"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">最小金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="amountTotalMin" autocomplete="off" placeholder="允许一个红包最小金额"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">转账费用</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="transactionFee" autocomplete="off" placeholder="一次转账的费用"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">服务费用</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="serviceFeeMin" autocomplete="off" placeholder="发每个红包的最低服务费用"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">服务费率</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="serviceFeeRate" autocomplete="off" placeholder="每个红包的服务费比例"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">收款地址</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="serviceFeeAddress" autocomplete="off" placeholder="服务费收款地址"
+                                   class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">区块高度</label>
                         <div class="layui-input-block">
                             <input type="text" name="lastBlockHeight" autocomplete="off" placeholder="最新区块高度"
                                    class="layui-input" readonly="readonly">
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">最新区块时间</label>
+                        <label class="layui-form-label">区块时间</label>
                         <div class="layui-input-block">
                             <input type="text" name="lastBlockTime" autocomplete="off" placeholder="最新区块时间"
                                    class="layui-input" readonly="readonly">
