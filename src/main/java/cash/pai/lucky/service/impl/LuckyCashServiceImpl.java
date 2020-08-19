@@ -59,7 +59,7 @@ public class LuckyCashServiceImpl implements LuckyCashService {
         //查询用户
         SysUserVo sysUserVo = sysUserService.findByLoginName(username).getData();
         luckyCashExample.createCriteria().andUserIdEqualTo(sysUserVo.getUserId());
-        return luckyCashMapper.selectByExample(luckyCashExample);
+        return luckyCashMapper.selectByExampleSymbol(luckyCashExample);
     }
 
     @Override

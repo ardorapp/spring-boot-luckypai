@@ -13,6 +13,8 @@ public interface LuckyCashMapper {
 
     List<LuckyCash> selectByExample(LuckyCashExample example);
 
+    List<LuckyCash> selectByExampleSymbol(LuckyCashExample example);
+
     LuckyCash selectByPrimaryKey(String luckycashId);
 
     int updateByPrimaryKeySelective(LuckyCash record);
