@@ -26,7 +26,13 @@
     <result column="packet_title" jdbcType="VARCHAR" property="packetTitle" />
     <result column="packet_content" jdbcType="VARCHAR" property="packetContent" />
     <result column="packet_image" jdbcType="VARCHAR" property="packetImage" />
+    <association property="assetsInfo" javaType="cash.pai.lucky.assets.info.pojo.AssetsInfo">
+      <!-- id:声明主键，是关联查询对象的唯一标识-->
+      <id property="assetsId" column="assets_id" />
+      <result property="assetsSymbol" column="assets_symbol" />
+    </association>
   </resultMap>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -84,6 +90,32 @@
       </if>
     </if>
   </select>
+
+  <select id="selectByExampleSymbol" parameterType="cash.pai.lucky.entity.LuckyCashExample" resultMap="BaseResultMap">
+    select
+    lc.luckycash_id, lc.user_id, lc.assets_id, lc.amount_total, lc.amount_used, lc.amount_send, lc.amount_available,
+    lc.amount_expiration, lc.transaction_fee, lc.service_fee, lc.packet_total, lc.packet_used, lc.packet_send,
+    lc.packet_available, lc.packet_expiration, lc.packet_type, lc.spend_time, lc.expiration_time, lc.create_time,
+    lc.update_time, lc.status, lc.packet_title, lc.packet_content, lc.packet_image,
+    info.assets_symbol
+    from assets_luckycash as lc,assets_info as info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    and lc.assets_id = info.assets_id
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

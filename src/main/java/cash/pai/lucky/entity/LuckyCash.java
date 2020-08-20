@@ -1,5 +1,6 @@
 package cash.pai.lucky.entity;
 
+import cash.pai.lucky.assets.info.pojo.AssetsInfo;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -12,6 +13,8 @@ public class LuckyCash {
     private String userId;
 
     private String assetsId;
+
+    private AssetsInfo assetsInfo;
 
     private BigDecimal amountTotal;
 

@@ -39,7 +39,12 @@ layui.use(['element', 'form', 'table', 'layer', 'laydate', 'util'], function () 
         , title: '我创建的红包列表'
         , cols: [[
             {field: 'luckycashId', title: '红包ID'}
-            , {field: 'assetsId', title: '资产'}
+            , {field: 'assetsSymbol', title: '资产',
+                templet:function(data){
+                    if(data.assetsInfo) return data.assetsInfo.assetsSymbol;
+                    return ''
+                }
+            }
             , {field: 'amountTotal', title: '总金额'}
             , {field: 'packetTitle', title: '标题'}
             , {field: 'status', title: '状态'}
@@ -83,6 +88,7 @@ layui.use(['element', 'form', 'table', 'layer', 'laydate', 'util'], function () 
         //编辑
         else if (obj.event === 'edit') {
             //回显操作表单
+            data.assetsSymbol = data.assetsInfo.assetsSymbol;
             $("#luckycashForm").form(data);
             form.render();
         }
