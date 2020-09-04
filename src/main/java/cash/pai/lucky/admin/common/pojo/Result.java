@@ -21,7 +21,7 @@ public class Result<T> implements Serializable {
     /**
      * 通信描述
      */
-    private String msg = "操作成功";
+    private String msg = "";
 
     /**
      * 通过静态方法获取实例

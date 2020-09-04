@@ -49,7 +49,7 @@ public class RedisUtil {
      * @param k
      * @param v
      * @param time
-     * @param unit
+     * @param unit  以毫秒为单位
      * @return  boolean
      *
      */

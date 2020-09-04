@@ -1,6 +1,7 @@
 package cash.pai.lucky.entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.Date;
 

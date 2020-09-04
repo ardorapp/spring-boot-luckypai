@@ -23,7 +23,7 @@ public class RedisUtilTest extends BaseTest {
 
     @Test
     public void cacheValue1() {
-        redisUtil.cacheValue("ldw", "dd",50, TimeUnit.SECONDS);
+        redisUtil.cacheValue("ldw", "dd", 50, TimeUnit.SECONDS);
     }
 
     @Test
@@ -32,11 +32,13 @@ public class RedisUtilTest extends BaseTest {
 
     @Test
     public void containsValueKey() {
+
+
     }
 
     @Test
     public void getValue() {
-        System.out.println( redisUtil.getValue("aa")+"=======================");
+        System.out.println(redisUtil.getValue("aa") + "=======================");
     }
 
     @Test
@@ -52,4 +54,16 @@ public class RedisUtilTest extends BaseTest {
         String str = MessageFormat.format("我是{0},我来自{1},今年{2}岁", "中国人", "北京", "22");
         System.out.println(str);
     }
+
+    public static void main(String[] args) {
+        System.out.println(ways(5));
+    }
+
+    public static int ways(int n) {
+        if (n == 1)
+            return 1;
+        if (n == 2) return 2;
+        return ways(n - 1) + ways(n - 2);
+    }
+
 }

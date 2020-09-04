@@ -1,6 +1,8 @@
 package cash.pai.lucky.service.impl;
 
 import cash.pai.lucky.admin.common.pojo.Result;
+import cash.pai.lucky.admin.util.DateUtil;
+import cash.pai.lucky.admin.util.MD5Util;
 import cash.pai.lucky.admin.util.UUIDUtil;
 import cash.pai.lucky.admin.util.VerifyCodeImageUtil;
 import cash.pai.lucky.common.redis.RedisUtil;
@@ -9,9 +11,12 @@ import cash.pai.lucky.dao.UserAuthorityDao;
 import cash.pai.lucky.dao.UserDao;
 import cash.pai.lucky.entity.UserAuthorityEntity;
 import cash.pai.lucky.entity.UserEntity;
+import cash.pai.lucky.param.LoginParam;
 import cash.pai.lucky.param.RegisterParam;
 import cash.pai.lucky.service.MailService;
 import cash.pai.lucky.service.UserAssetService;
+import com.alibaba.csp.sentinel.util.TimeUtil;
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -95,7 +100,7 @@ public class UserAssetServiceImpl implements UserAssetService {
             //将激活码放到redis中，过期时间为10分钟
             redisUtil.cacheValue(RedisKeyConstant.VALDATE_CODE_KEY + verifyCode, userName, 600, TimeUnit.SECONDS);
             //发送邮件
-            mailService.sendActiveMail(email, verifyCode,userName);
+            mailService.sendActiveMail(email, verifyCode, userName);
             result = Result.of(newUser, true, "注册成功!");
         }
         return result;
@@ -114,6 +119,32 @@ public class UserAssetServiceImpl implements UserAssetService {
             }
         }
         return result;
+    }
+
+    @Override
+    @Transactional
+    public Result login(LoginParam loginParam) {
+        UserEntity param = new UserEntity();
+        BeanUtils.copyProperties(loginParam, param);
+        List<UserEntity> list = findByCondition(param);
+        if (CollectionUtils.isNotEmpty(list)) {
+            UserEntity loginUser = list.get(0);
+            if ("N".equals(loginUser.getValid())) {
+                return Result.of("用户尚未激活，请先激活");
+            } else if ("Y".equals(loginUser.getValid())) {
+                //登录成功，则用户信息放到redis中，
+                String userName = loginUser.getUserName();
+                long timeStamp = System.currentTimeMillis();
+                String token = MD5Util.getMD5(userName + timeStamp);
+                String loginUserJson = JSON.toJSONString(loginUser);
+                redisUtil.cacheValue(token, loginUserJson);
+                return Result.of("登录成功");
+            }
+        } else {
+            //找不到对于的用户
+            return Result.of("用户名或者密码错误，请检查");
+        }
+        return Result.of("登录失败");
     }
 
     public Integer insert(UserEntity userEntity) {

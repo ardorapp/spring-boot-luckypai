@@ -49,6 +49,9 @@
             <if test="userName != null">
                 AND user_name = #{userName}
             </if>
+            <if test="password != null">
+                AND password = #{password}
+            </if>
         </where>
     </select>
 

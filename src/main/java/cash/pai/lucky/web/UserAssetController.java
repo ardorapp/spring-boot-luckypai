@@ -2,6 +2,7 @@ package cash.pai.lucky.web;
 
 import cash.pai.lucky.admin.common.pojo.Result;
 import cash.pai.lucky.entity.UserEntity;
+import cash.pai.lucky.param.LoginParam;
 import cash.pai.lucky.param.RegisterParam;
 import cash.pai.lucky.param.UserParam;
 import cash.pai.lucky.service.MailService;
@@ -45,6 +46,7 @@ public class UserAssetController {
 
     /**
      * 注册新用户  同时发送一封激活邮件
+     * 注册的时候，前端把密码传过来（密文），
      *
      * @return
      */
@@ -71,10 +73,26 @@ public class UserAssetController {
      * @return
      */
     @ApiOperation(value = "激活新用户", nickname = "ldw")
-    @RequestMapping(value = "checkCode",method = RequestMethod.GET)
+    @RequestMapping(value = "checkCode", method = RequestMethod.GET)
     @ResponseBody
     public Result checkCode(@RequestParam("checkCode") String checkCode) {
         Result result = userAssetService.checkCode(checkCode);
         return result;
     }
+
+    /**
+     * 登录接口
+     * 主要是校验用户名userName和  密码password是否匹配
+     *
+     * @return
+     */
+    @ApiOperation(value = "登录")
+    @RequestMapping(value = "login")
+    @ResponseBody
+    public Result login(@RequestBody @Valid LoginParam loginParam) {
+        Result result = userAssetService.login(loginParam);
+        return result;
+    }
+
+
 }
