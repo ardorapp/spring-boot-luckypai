@@ -4,9 +4,7 @@ package cash.pai.lucky.admin.config.logback;
 import cash.pai.lucky.admin.config.websocket.MyEndpointConfigure;
 import cash.pai.lucky.admin.util.ErrorUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.impl.StaticLoggerBinder;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.logging.LoggingSystem;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.util.StringUtils;
 
@@ -16,9 +14,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
@@ -26,6 +22,10 @@ import java.util.regex.Pattern;
 
 /**
  * WebSocket获取实时日志并输出到Web页面
+ *
+ * 其实就是一点击“实时日志” 标签页时，就打开websocket   然后用多线程独处当前log文件夹下的日志文件，
+ * 然后推送到前端页面，完全可以去掉
+ *
  */
 @Slf4j
 @Component
