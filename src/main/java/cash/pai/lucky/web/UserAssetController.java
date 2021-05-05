@@ -38,6 +38,7 @@ public class UserAssetController {
         if (StringUtils.isEmpty(userId)) {
             result.setMsg("userId 不能为空");
         } else {
+
             UserEntity user = userAssetService.findById(userId);
             result = Result.of(user);
         }

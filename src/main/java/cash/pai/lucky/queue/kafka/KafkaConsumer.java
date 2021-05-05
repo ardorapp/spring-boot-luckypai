@@ -5,6 +5,7 @@ import cash.pai.lucky.common.redis.RedisUtil;
 import cash.pai.lucky.common.webSocket.WebSocketServer;
 import cash.pai.lucky.service.ISeckillService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
  * @author 科帮网 By https://blog.52itstyle.com
  */
 @Component
+@Lazy
 public class KafkaConsumer {
 	@Autowired
 	private ISeckillService seckillService;
