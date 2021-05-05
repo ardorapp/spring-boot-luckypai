@@ -234,11 +234,11 @@
 	  </dependency>
 
 	  <!--引入PAI区块链：paicoin-rpc-client -->
-	  <dependency>
+	<!--  <dependency>
 		  <groupId>cash.pai.rpcclient</groupId>
 		  <artifactId>paicoin-rpc-client</artifactId>
 		  <version>0.0.1-SNAPSHOT</version>
-	  </dependency>
+	  </dependency>-->
 
 	  <!--邮件-->
 	  <dependency>
